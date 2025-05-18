@@ -21,7 +21,7 @@ final class GitHubAPIE2ETests: XCTestCase {
         token = pat
     }
 
-    // MARK: - Tests ----------------------------------------------------------
+    // MARK: - Tests
 
     /// Covers:
     /// 1. GET /users/{username}
@@ -101,8 +101,7 @@ final class GitHubAPIE2ETests: XCTestCase {
         }
     }
 
-    // MARK: - Networking Helpers --------------------------------------------
-
+    // MARK: - Networking Helpers
     private func makeURL(path: String,
                          queryItems: [URLQueryItem] = []) -> URL {
         var comps = URLComponents()

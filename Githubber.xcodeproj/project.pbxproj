@@ -180,9 +180,7 @@
 		D168D2322DD992A8008C7DB9 /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
-				D168D2332DD992B4008C7DB9 /* DomainModels */,
-				D168D2182DD98D57008C7DB9 /* DTOs */,
-				D168D23B2DD9931D008C7DB9 /* RemoteUserRepository.swift */,
+				D168D2432DD99BF2008C7DB9 /* RemoteUserRepo */,
 			);
 			path = DataLayer;
 			sourceTree = "<group>";
@@ -203,6 +201,16 @@
 				D168D2392DD992FE008C7DB9 /* UserReposPage.swift */,
 			);
 			path = PaginationWrapper;
+			sourceTree = "<group>";
+		};
+		D168D2432DD99BF2008C7DB9 /* RemoteUserRepo */ = {
+			isa = PBXGroup;
+			children = (
+				D168D2332DD992B4008C7DB9 /* DomainModels */,
+				D168D2182DD98D57008C7DB9 /* DTOs */,
+				D168D23B2DD9931D008C7DB9 /* RemoteUserRepository.swift */,
+			);
+			path = RemoteUserRepo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
