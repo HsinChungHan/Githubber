@@ -133,13 +133,6 @@ final class StoreUsersReposRepository: StoreUsersReposRepositoryProtocol {
 // MARK: - Private Helpers
 
 private extension StoreUsersReposRepository {
-
-    /// Codable wrapper that stores repo list plus the next page index
-    struct ReposPageContainer: Codable {
-        let repos: [GitHubRepoDTO]
-        let nextPage: Int?
-    }
-
     /// Decode cached JSON into `UserReposPage`
     func parseReposPage(from json: Any) async throws -> UserReposPage {
         let data: Data

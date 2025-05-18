@@ -133,13 +133,6 @@ final class StoreUsersRepository: StoreUsersRepositoryProtocol {
 // MARK: - Private Helpers
 
 private extension StoreUsersRepository {
-    
-    /// Codable wrapper to persist users plus next cursor
-    struct UsersPageContainer: Codable {
-        let users: [SearchUserDTO]
-        let nextSince: Int?
-    }
-    
     /// Decode cached JSON into PublicUsersPage
     func parseUsersPage(from json: Any) async throws -> PublicUsersPage {
         let data: Data
