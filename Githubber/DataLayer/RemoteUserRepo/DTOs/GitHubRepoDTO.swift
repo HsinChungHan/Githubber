@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Repository item  (/users/{username}/repos)
-struct GitHubRepoDTO: Decodable {
+struct GitHubRepoDTO: Codable {
     let name: String
     let language: String?
     let stargazersCount: Int     // stargazers_count → stargazersCount
