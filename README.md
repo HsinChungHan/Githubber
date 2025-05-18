@@ -1,4 +1,9 @@
 # Githubber
+<div align="center">
+
+[🎥 Demo Video](https://github.com/user-attachments/assets/7f1aa318-1cb2-4aed-ba33-868f799a2daf)
+
+</div>
 
 A sample GitHub user & repository browser app built with **Clean Architecture** + **MVVM**, featuring pagination, search, caching, and favorites.
 
