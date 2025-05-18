@@ -66,7 +66,7 @@ final class StoreUsersReposRepositoryTests: XCTestCase {
     /// saveReposPage / getReposPage round-trip
     func test_saveAndGetReposPage_success() async throws {
         // Build sample repo DTO
-        let sampleRepo = Githubber.GitHubRepoDTO(
+        let sampleRepo = GitHubRepoDTO(
             name: "Hello-World",
             language: "Swift",
             stargazersCount: 42,
@@ -74,7 +74,7 @@ final class StoreUsersReposRepositoryTests: XCTestCase {
             fork: false,
             htmlUrl: URL(string: "https://github.com/octocat/Hello-World")!
         )
-        let pageData = Githubber.UserReposPage(repos: [sampleRepo], nextPage: 2)
+        let pageData = UserReposPage(repos: [sampleRepo], nextPage: 2)
         
         try await repo.saveReposPage(username: "octocat", page: 1, pageData: pageData)
         

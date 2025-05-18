@@ -68,8 +68,8 @@ final class StoreUsersRepositoryTests: XCTestCase {
     /// saveUsersPage / getUsersPage round-trip
     func test_saveAndGetUsersPage_success() async throws {
         // Build sample DTOs
-        let user = Githubber.SearchUserDTO(login: "octocat", id: 1, avatarUrl: URL(string:"https://img")!)
-        let page = Githubber.PublicUsersPage(users: [user], nextSince: 135)
+        let user = SearchUserDTO(login: "octocat", id: 1, avatarUrl: URL(string:"https://img")!)
+        let page = PublicUsersPage(users: [user], nextSince: 135)
 
         // Save page for cursor 0
         try await repository.saveUsersPage(cursor: 0, page: page)

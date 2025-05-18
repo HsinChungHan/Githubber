@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D16078E42DD9C97000603998 /* SearchUsersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2532DD9C23C008C7DB9 /* SearchUsersUseCase.swift */; };
+		D16078E52DD9C97400603998 /* GetUsersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2552DD9C25E008C7DB9 /* GetUsersUseCase.swift */; };
+		D16078E62DD9C9A700603998 /* StoreUsersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2452DD9B26C008C7DB9 /* StoreUsersRepository.swift */; };
+		D16078E72DD9C9AB00603998 /* StoreUsersReposRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2492DD9B822008C7DB9 /* StoreUsersReposRepository.swift */; };
+		D16078E82DD9C9B500603998 /* UsersPageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D24E2DD9BBC1008C7DB9 /* UsersPageContainer.swift */; };
+		D16078E92DD9C9BA00603998 /* ReposPageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2502DD9BBFA008C7DB9 /* ReposPageContainer.swift */; };
+		D16078EB2DD9CA4D00603998 /* GetUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078EA2DD9CA4D00603998 /* GetUsersUseCaseTests.swift */; };
 		D168D1E62DD6D8C9008C7DB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D1E52DD6D8C9008C7DB9 /* AppDelegate.swift */; };
 		D168D1E82DD6D8C9008C7DB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D1E72DD6D8C9008C7DB9 /* SceneDelegate.swift */; };
 		D168D1EA2DD6D8C9008C7DB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D1E92DD6D8C9008C7DB9 /* ViewController.swift */; };
@@ -43,6 +50,9 @@
 		D168D24C2DD9B8D9008C7DB9 /* StoreUsersReposRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D24B2DD9B8D9008C7DB9 /* StoreUsersReposRepositoryTests.swift */; };
 		D168D24F2DD9BBC1008C7DB9 /* UsersPageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D24E2DD9BBC1008C7DB9 /* UsersPageContainer.swift */; };
 		D168D2512DD9BBFA008C7DB9 /* ReposPageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2502DD9BBFA008C7DB9 /* ReposPageContainer.swift */; };
+		D168D2542DD9C23C008C7DB9 /* SearchUsersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2532DD9C23C008C7DB9 /* SearchUsersUseCase.swift */; };
+		D168D2562DD9C25E008C7DB9 /* GetUsersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2552DD9C25E008C7DB9 /* GetUsersUseCase.swift */; };
+		D168D2582DD9C32C008C7DB9 /* SearchUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2572DD9C32C008C7DB9 /* SearchUsersUseCaseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +73,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D16078EA2DD9CA4D00603998 /* GetUsersUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUsersUseCaseTests.swift; sourceTree = "<group>"; };
 		D168D1E22DD6D8C9008C7DB9 /* Githubber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Githubber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D168D1E52DD6D8C9008C7DB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D168D1E72DD6D8C9008C7DB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +104,9 @@
 		D168D24B2DD9B8D9008C7DB9 /* StoreUsersReposRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreUsersReposRepositoryTests.swift; sourceTree = "<group>"; };
 		D168D24E2DD9BBC1008C7DB9 /* UsersPageContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersPageContainer.swift; sourceTree = "<group>"; };
 		D168D2502DD9BBFA008C7DB9 /* ReposPageContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposPageContainer.swift; sourceTree = "<group>"; };
+		D168D2532DD9C23C008C7DB9 /* SearchUsersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersUseCase.swift; sourceTree = "<group>"; };
+		D168D2552DD9C25E008C7DB9 /* GetUsersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUsersUseCase.swift; sourceTree = "<group>"; };
+		D168D2572DD9C32C008C7DB9 /* SearchUsersUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersUseCaseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +164,7 @@
 				D168D1E52DD6D8C9008C7DB9 /* AppDelegate.swift */,
 				D168D1E72DD6D8C9008C7DB9 /* SceneDelegate.swift */,
 				D168D1E92DD6D8C9008C7DB9 /* ViewController.swift */,
+				D168D2522DD9BC4F008C7DB9 /* DomainLayer */,
 				D168D2322DD992A8008C7DB9 /* DataLayer */,
 				D168D1EB2DD6D8C9008C7DB9 /* Main.storyboard */,
 				D168D1EE2DD6D8CB008C7DB9 /* Assets.xcassets */,
@@ -167,6 +182,8 @@
 				D168D23E2DD9954F008C7DB9 /* RemoteUserRepositoryE2ETests.swift */,
 				D168D2472DD9B40C008C7DB9 /* StoreUsersRepositoryTests.swift */,
 				D168D24B2DD9B8D9008C7DB9 /* StoreUsersReposRepositoryTests.swift */,
+				D168D2572DD9C32C008C7DB9 /* SearchUsersUseCaseTests.swift */,
+				D16078EA2DD9CA4D00603998 /* GetUsersUseCaseTests.swift */,
 			);
 			path = GithubberTests;
 			sourceTree = "<group>";
@@ -245,6 +262,15 @@
 				D168D2502DD9BBFA008C7DB9 /* ReposPageContainer.swift */,
 			);
 			path = DTOs;
+			sourceTree = "<group>";
+		};
+		D168D2522DD9BC4F008C7DB9 /* DomainLayer */ = {
+			isa = PBXGroup;
+			children = (
+				D168D2532DD9C23C008C7DB9 /* SearchUsersUseCase.swift */,
+				D168D2552DD9C25E008C7DB9 /* GetUsersUseCase.swift */,
+			);
+			path = DomainLayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -393,6 +419,8 @@
 				D168D2512DD9BBFA008C7DB9 /* ReposPageContainer.swift in Sources */,
 				D168D1EA2DD6D8C9008C7DB9 /* ViewController.swift in Sources */,
 				D168D23C2DD9931D008C7DB9 /* RemoteUserRepository.swift in Sources */,
+				D168D2542DD9C23C008C7DB9 /* SearchUsersUseCase.swift in Sources */,
+				D168D2562DD9C25E008C7DB9 /* GetUsersUseCase.swift in Sources */,
 				D168D24F2DD9BBC1008C7DB9 /* UsersPageContainer.swift in Sources */,
 				D168D21E2DD98D95008C7DB9 /* SearchUsersResponseDTO.swift in Sources */,
 				D168D24A2DD9B822008C7DB9 /* StoreUsersReposRepository.swift in Sources */,
@@ -412,15 +440,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				D168D1FD2DD6D8CB008C7DB9 /* GithubberTests.swift in Sources */,
+				D16078E42DD9C97000603998 /* SearchUsersUseCase.swift in Sources */,
+				D16078E62DD9C9A700603998 /* StoreUsersRepository.swift in Sources */,
 				D168D2262DD98E2E008C7DB9 /* APIEndToEndTests.swift in Sources */,
+				D168D2582DD9C32C008C7DB9 /* SearchUsersUseCaseTests.swift in Sources */,
 				D168D2422DD99AC8008C7DB9 /* UserReposPage.swift in Sources */,
 				D168D2402DD99AC4008C7DB9 /* PublicUsersPage.swift in Sources */,
+				D16078E82DD9C9B500603998 /* UsersPageContainer.swift in Sources */,
 				D168D2482DD9B40C008C7DB9 /* StoreUsersRepositoryTests.swift in Sources */,
 				D168D23D2DD99322008C7DB9 /* RemoteUserRepository.swift in Sources */,
 				D168D23F2DD9954F008C7DB9 /* RemoteUserRepositoryE2ETests.swift in Sources */,
 				D168D2232DD98DC0008C7DB9 /* SearchUsersResponseDTO.swift in Sources */,
 				D168D2242DD98DC2008C7DB9 /* SearchUserDTO.swift in Sources */,
+				D16078EB2DD9CA4D00603998 /* GetUsersUseCaseTests.swift in Sources */,
+				D16078E72DD9C9AB00603998 /* StoreUsersReposRepository.swift in Sources */,
+				D16078E52DD9C97400603998 /* GetUsersUseCase.swift in Sources */,
 				D168D2412DD99AC6008C7DB9 /* SearchUsersPage.swift in Sources */,
+				D16078E92DD9C9BA00603998 /* ReposPageContainer.swift in Sources */,
 				D168D24C2DD9B8D9008C7DB9 /* StoreUsersReposRepositoryTests.swift in Sources */,
 				D168D2222DD98DBD008C7DB9 /* GitHubRepoDTO.swift in Sources */,
 				D168D2212DD98DB9008C7DB9 /* GitHubUserDTO.swift in Sources */,
