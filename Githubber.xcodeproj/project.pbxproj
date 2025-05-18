@@ -28,6 +28,15 @@
 		D168D22A2DD98F11008C7DB9 /* RHCacheStore in Frameworks */ = {isa = PBXBuildFile; productRef = D168D2292DD98F11008C7DB9 /* RHCacheStore */; };
 		D168D22D2DD98F2A008C7DB9 /* RHCacheStoreAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D168D22C2DD98F2A008C7DB9 /* RHCacheStoreAPI */; };
 		D168D2302DD98F44008C7DB9 /* RHNetworkAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D168D22F2DD98F44008C7DB9 /* RHNetworkAPI */; };
+		D168D2362DD992DB008C7DB9 /* PublicUsersPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2352DD992DB008C7DB9 /* PublicUsersPage.swift */; };
+		D168D2382DD992EE008C7DB9 /* SearchUsersPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2372DD992EE008C7DB9 /* SearchUsersPage.swift */; };
+		D168D23A2DD992FE008C7DB9 /* UserReposPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2392DD992FE008C7DB9 /* UserReposPage.swift */; };
+		D168D23C2DD9931D008C7DB9 /* RemoteUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D23B2DD9931D008C7DB9 /* RemoteUserRepository.swift */; };
+		D168D23D2DD99322008C7DB9 /* RemoteUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D23B2DD9931D008C7DB9 /* RemoteUserRepository.swift */; };
+		D168D23F2DD9954F008C7DB9 /* RemoteUserRepositoryE2ETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D23E2DD9954F008C7DB9 /* RemoteUserRepositoryE2ETests.swift */; };
+		D168D2402DD99AC4008C7DB9 /* PublicUsersPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2352DD992DB008C7DB9 /* PublicUsersPage.swift */; };
+		D168D2412DD99AC6008C7DB9 /* SearchUsersPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2372DD992EE008C7DB9 /* SearchUsersPage.swift */; };
+		D168D2422DD99AC8008C7DB9 /* UserReposPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2392DD992FE008C7DB9 /* UserReposPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +76,11 @@
 		D168D21B2DD98D82008C7DB9 /* GitHubRepoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepoDTO.swift; sourceTree = "<group>"; };
 		D168D21D2DD98D95008C7DB9 /* SearchUsersResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersResponseDTO.swift; sourceTree = "<group>"; };
 		D168D21F2DD98DA4008C7DB9 /* SearchUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserDTO.swift; sourceTree = "<group>"; };
+		D168D2352DD992DB008C7DB9 /* PublicUsersPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicUsersPage.swift; sourceTree = "<group>"; };
+		D168D2372DD992EE008C7DB9 /* SearchUsersPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersPage.swift; sourceTree = "<group>"; };
+		D168D2392DD992FE008C7DB9 /* UserReposPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReposPage.swift; sourceTree = "<group>"; };
+		D168D23B2DD9931D008C7DB9 /* RemoteUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUserRepository.swift; sourceTree = "<group>"; };
+		D168D23E2DD9954F008C7DB9 /* RemoteUserRepositoryE2ETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUserRepositoryE2ETests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +138,7 @@
 				D168D1E52DD6D8C9008C7DB9 /* AppDelegate.swift */,
 				D168D1E72DD6D8C9008C7DB9 /* SceneDelegate.swift */,
 				D168D1E92DD6D8C9008C7DB9 /* ViewController.swift */,
-				D168D2182DD98D57008C7DB9 /* DTOs */,
+				D168D2322DD992A8008C7DB9 /* DataLayer */,
 				D168D1EB2DD6D8C9008C7DB9 /* Main.storyboard */,
 				D168D1EE2DD6D8CB008C7DB9 /* Assets.xcassets */,
 				D168D1F02DD6D8CB008C7DB9 /* LaunchScreen.storyboard */,
@@ -138,6 +152,7 @@
 			children = (
 				D168D1FC2DD6D8CB008C7DB9 /* GithubberTests.swift */,
 				D168D2152DD6DE08008C7DB9 /* APIEndToEndTests.swift */,
+				D168D23E2DD9954F008C7DB9 /* RemoteUserRepositoryE2ETests.swift */,
 			);
 			path = GithubberTests;
 			sourceTree = "<group>";
@@ -160,6 +175,34 @@
 				D168D21F2DD98DA4008C7DB9 /* SearchUserDTO.swift */,
 			);
 			path = DTOs;
+			sourceTree = "<group>";
+		};
+		D168D2322DD992A8008C7DB9 /* DataLayer */ = {
+			isa = PBXGroup;
+			children = (
+				D168D2332DD992B4008C7DB9 /* DomainModels */,
+				D168D2182DD98D57008C7DB9 /* DTOs */,
+				D168D23B2DD9931D008C7DB9 /* RemoteUserRepository.swift */,
+			);
+			path = DataLayer;
+			sourceTree = "<group>";
+		};
+		D168D2332DD992B4008C7DB9 /* DomainModels */ = {
+			isa = PBXGroup;
+			children = (
+				D168D2342DD992C3008C7DB9 /* PaginationWrapper */,
+			);
+			path = DomainModels;
+			sourceTree = "<group>";
+		};
+		D168D2342DD992C3008C7DB9 /* PaginationWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				D168D2352DD992DB008C7DB9 /* PublicUsersPage.swift */,
+				D168D2372DD992EE008C7DB9 /* SearchUsersPage.swift */,
+				D168D2392DD992FE008C7DB9 /* UserReposPage.swift */,
+			);
+			path = PaginationWrapper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,11 +348,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D168D1EA2DD6D8C9008C7DB9 /* ViewController.swift in Sources */,
+				D168D23C2DD9931D008C7DB9 /* RemoteUserRepository.swift in Sources */,
 				D168D21E2DD98D95008C7DB9 /* SearchUsersResponseDTO.swift in Sources */,
 				D168D1E62DD6D8C9008C7DB9 /* AppDelegate.swift in Sources */,
+				D168D23A2DD992FE008C7DB9 /* UserReposPage.swift in Sources */,
 				D168D2202DD98DA4008C7DB9 /* SearchUserDTO.swift in Sources */,
 				D168D1E82DD6D8C9008C7DB9 /* SceneDelegate.swift in Sources */,
 				D168D21C2DD98D82008C7DB9 /* GitHubRepoDTO.swift in Sources */,
+				D168D2362DD992DB008C7DB9 /* PublicUsersPage.swift in Sources */,
+				D168D2382DD992EE008C7DB9 /* SearchUsersPage.swift in Sources */,
 				D168D21A2DD98D70008C7DB9 /* GitHubUserDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,8 +367,13 @@
 			files = (
 				D168D1FD2DD6D8CB008C7DB9 /* GithubberTests.swift in Sources */,
 				D168D2262DD98E2E008C7DB9 /* APIEndToEndTests.swift in Sources */,
+				D168D2422DD99AC8008C7DB9 /* UserReposPage.swift in Sources */,
+				D168D2402DD99AC4008C7DB9 /* PublicUsersPage.swift in Sources */,
+				D168D23D2DD99322008C7DB9 /* RemoteUserRepository.swift in Sources */,
+				D168D23F2DD9954F008C7DB9 /* RemoteUserRepositoryE2ETests.swift in Sources */,
 				D168D2232DD98DC0008C7DB9 /* SearchUsersResponseDTO.swift in Sources */,
 				D168D2242DD98DC2008C7DB9 /* SearchUserDTO.swift in Sources */,
+				D168D2412DD99AC6008C7DB9 /* SearchUsersPage.swift in Sources */,
 				D168D2222DD98DBD008C7DB9 /* GitHubRepoDTO.swift in Sources */,
 				D168D2212DD98DB9008C7DB9 /* GitHubUserDTO.swift in Sources */,
 			);
