@@ -25,6 +25,9 @@
 		D168D2232DD98DC0008C7DB9 /* SearchUsersResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D21D2DD98D95008C7DB9 /* SearchUsersResponseDTO.swift */; };
 		D168D2242DD98DC2008C7DB9 /* SearchUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D21F2DD98DA4008C7DB9 /* SearchUserDTO.swift */; };
 		D168D2262DD98E2E008C7DB9 /* APIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2152DD6DE08008C7DB9 /* APIEndToEndTests.swift */; };
+		D168D22A2DD98F11008C7DB9 /* RHCacheStore in Frameworks */ = {isa = PBXBuildFile; productRef = D168D2292DD98F11008C7DB9 /* RHCacheStore */; };
+		D168D22D2DD98F2A008C7DB9 /* RHCacheStoreAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D168D22C2DD98F2A008C7DB9 /* RHCacheStoreAPI */; };
+		D168D2302DD98F44008C7DB9 /* RHNetworkAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D168D22F2DD98F44008C7DB9 /* RHNetworkAPI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +74,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D168D2302DD98F44008C7DB9 /* RHNetworkAPI in Frameworks */,
+				D168D22D2DD98F2A008C7DB9 /* RHCacheStoreAPI in Frameworks */,
+				D168D22A2DD98F11008C7DB9 /* RHCacheStore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +178,11 @@
 			dependencies = (
 			);
 			name = Githubber;
+			packageProductDependencies = (
+				D168D2292DD98F11008C7DB9 /* RHCacheStore */,
+				D168D22C2DD98F2A008C7DB9 /* RHCacheStoreAPI */,
+				D168D22F2DD98F44008C7DB9 /* RHNetworkAPI */,
+			);
 			productName = Githubber;
 			productReference = D168D1E22DD6D8C9008C7DB9 /* Githubber.app */;
 			productType = "com.apple.product-type.application";
@@ -244,6 +255,12 @@
 				Base,
 			);
 			mainGroup = D168D1D92DD6D8C9008C7DB9;
+			packageReferences = (
+				D168D2272DD98EFA008C7DB9 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				D168D2282DD98F11008C7DB9 /* XCRemoteSwiftPackageReference "RHCacheStore" */,
+				D168D22B2DD98F2A008C7DB9 /* XCRemoteSwiftPackageReference "RHCacheStoreAPI" */,
+				D168D22E2DD98F44008C7DB9 /* XCRemoteSwiftPackageReference "RHNetworkAPI" */,
+			);
 			productRefGroup = D168D1E32DD6D8C9008C7DB9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -645,6 +662,59 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D168D2272DD98EFA008C7DB9 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		D168D2282DD98F11008C7DB9 /* XCRemoteSwiftPackageReference "RHCacheStore" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/HsinChungHan/RHCacheStore";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		D168D22B2DD98F2A008C7DB9 /* XCRemoteSwiftPackageReference "RHCacheStoreAPI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/HsinChungHan/RHCacheStoreAPI";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		D168D22E2DD98F44008C7DB9 /* XCRemoteSwiftPackageReference "RHNetworkAPI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/HsinChungHan/RHNetworkAPI";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D168D2292DD98F11008C7DB9 /* RHCacheStore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D168D2282DD98F11008C7DB9 /* XCRemoteSwiftPackageReference "RHCacheStore" */;
+			productName = RHCacheStore;
+		};
+		D168D22C2DD98F2A008C7DB9 /* RHCacheStoreAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D168D22B2DD98F2A008C7DB9 /* XCRemoteSwiftPackageReference "RHCacheStoreAPI" */;
+			productName = RHCacheStoreAPI;
+		};
+		D168D22F2DD98F44008C7DB9 /* RHNetworkAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D168D22E2DD98F44008C7DB9 /* XCRemoteSwiftPackageReference "RHNetworkAPI" */;
+			productName = RHNetworkAPI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D168D1DA2DD6D8C9008C7DB9 /* Project object */;
 }
