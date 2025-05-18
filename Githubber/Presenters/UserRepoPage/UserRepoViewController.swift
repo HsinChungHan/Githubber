@@ -155,7 +155,7 @@ final class UserRepoViewController: UIViewController {
     }
 }
 
-extension UserRepoViewController: UITableViewDataSource, UITableViewDelegate {
+extension UserRepoViewController: UITableViewDataSource {
     func tableView(_ tv: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         viewModel.repos.count
@@ -189,5 +189,16 @@ extension UserRepoViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tv: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
         44
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension UserRepoViewController: UITableViewDelegate {
+    func tableView(_ tv: UITableView, didSelectRowAt ip: IndexPath) {
+        tv.deselectRow(at: ip, animated: true)
+        let repo = viewModel.repos[ip.row]
+        let webVC = RepoWebViewController(url: repo.url)
+        webVC.title = repo.name
+        navigationController?.pushViewController(webVC, animated: true)
     }
 }
