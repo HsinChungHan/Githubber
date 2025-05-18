@@ -29,6 +29,12 @@
 		D16079032DD9EBDA00603998 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D16079022DD9EBDA00603998 /* SnapKit */; };
 		D16079052DD9EBF500603998 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16079042DD9EBF500603998 /* UserListViewController.swift */; };
 		D16079062DD9EBF500603998 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16079042DD9EBF500603998 /* UserListViewController.swift */; };
+		D160790C2DD9F30400603998 /* UserRepoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D160790B2DD9F30400603998 /* UserRepoViewModel.swift */; };
+		D160790D2DD9F30400603998 /* UserRepoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D160790B2DD9F30400603998 /* UserRepoViewModel.swift */; };
+		D160790F2DD9F34600603998 /* UserRepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D160790E2DD9F34600603998 /* UserRepoViewController.swift */; };
+		D16079102DD9F34600603998 /* UserRepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D160790E2DD9F34600603998 /* UserRepoViewController.swift */; };
+		D16079122DD9F63B00603998 /* RepoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16079112DD9F63B00603998 /* RepoTableViewCell.swift */; };
+		D16079132DD9F63B00603998 /* RepoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16079112DD9F63B00603998 /* RepoTableViewCell.swift */; };
 		D168D1E62DD6D8C9008C7DB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D1E52DD6D8C9008C7DB9 /* AppDelegate.swift */; };
 		D168D1E82DD6D8C9008C7DB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D1E72DD6D8C9008C7DB9 /* SceneDelegate.swift */; };
 		D168D1EF2DD6D8CB008C7DB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D168D1EE2DD6D8CB008C7DB9 /* Assets.xcassets */; };
@@ -94,6 +100,9 @@
 		D16078FB2DD9EABB00603998 /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
 		D16078FE2DD9EBBA00603998 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		D16079042DD9EBF500603998 /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
+		D160790B2DD9F30400603998 /* UserRepoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepoViewModel.swift; sourceTree = "<group>"; };
+		D160790E2DD9F34600603998 /* UserRepoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepoViewController.swift; sourceTree = "<group>"; };
+		D16079112DD9F63B00603998 /* RepoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoTableViewCell.swift; sourceTree = "<group>"; };
 		D168D1E22DD6D8C9008C7DB9 /* Githubber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Githubber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D168D1E52DD6D8C9008C7DB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D168D1E72DD6D8C9008C7DB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +178,7 @@
 		D16078ED2DD9E7AD00603998 /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				D160790A2DD9F28800603998 /* UserRepoPage */,
 				D16078EC2DD9E79300603998 /* UserListPage */,
 			);
 			path = Presenters;
@@ -190,6 +200,16 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D160790A2DD9F28800603998 /* UserRepoPage */ = {
+			isa = PBXGroup;
+			children = (
+				D160790B2DD9F30400603998 /* UserRepoViewModel.swift */,
+				D16079112DD9F63B00603998 /* RepoTableViewCell.swift */,
+				D160790E2DD9F34600603998 /* UserRepoViewController.swift */,
+			);
+			path = UserRepoPage;
 			sourceTree = "<group>";
 		};
 		D168D1D92DD6D8C9008C7DB9 = {
@@ -474,6 +494,9 @@
 				D168D24F2DD9BBC1008C7DB9 /* UsersPageContainer.swift in Sources */,
 				D16078F52DD9E90200603998 /* Repo.swift in Sources */,
 				D168D21E2DD98D95008C7DB9 /* SearchUsersResponseDTO.swift in Sources */,
+				D16079122DD9F63B00603998 /* RepoTableViewCell.swift in Sources */,
+				D160790C2DD9F30400603998 /* UserRepoViewModel.swift in Sources */,
+				D160790F2DD9F34600603998 /* UserRepoViewController.swift in Sources */,
 				D168D24A2DD9B822008C7DB9 /* StoreUsersReposRepository.swift in Sources */,
 				D168D1E62DD6D8C9008C7DB9 /* AppDelegate.swift in Sources */,
 				D168D23A2DD992FE008C7DB9 /* UserReposPage.swift in Sources */,
@@ -494,6 +517,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D168D1FD2DD6D8CB008C7DB9 /* GithubberTests.swift in Sources */,
+				D16079132DD9F63B00603998 /* RepoTableViewCell.swift in Sources */,
+				D160790D2DD9F30400603998 /* UserRepoViewModel.swift in Sources */,
 				D16079002DD9EBBA00603998 /* UserTableViewCell.swift in Sources */,
 				D16078E42DD9C97000603998 /* SearchUsersUseCase.swift in Sources */,
 				D16078E62DD9C9A700603998 /* StoreUsersRepository.swift in Sources */,
@@ -519,6 +544,7 @@
 				D16078E92DD9C9BA00603998 /* ReposPageContainer.swift in Sources */,
 				D16078FA2DD9EA1B00603998 /* RepoPage.swift in Sources */,
 				D168D24C2DD9B8D9008C7DB9 /* StoreUsersReposRepositoryTests.swift in Sources */,
+				D16079102DD9F34600603998 /* UserRepoViewController.swift in Sources */,
 				D168D2222DD98DBD008C7DB9 /* GitHubRepoDTO.swift in Sources */,
 				D168D2212DD98DB9008C7DB9 /* GitHubUserDTO.swift in Sources */,
 			);

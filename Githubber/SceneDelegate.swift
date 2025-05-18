@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let usersRepoStore = StoreUsersReposRepository()
         let useCase = GetUsersUseCase.init(remoteRepo: remoteUsersRepo, usersStore: localUsersStore, reposStore: usersRepoStore)
         let viewModel = UserListViewModel(useCase: useCase)
-        let rootViewController = UserListViewController(viewModel: viewModel)
+        let rootViewController = UserListViewController(viewModel: viewModel, remoteRepo: remoteUsersRepo)
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = UINavigationController(rootViewController: rootViewController)
         self.window = window
