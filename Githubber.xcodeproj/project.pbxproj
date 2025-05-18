@@ -22,10 +22,15 @@
 		D16078F82DD9E91400603998 /* RepoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078F72DD9E91400603998 /* RepoPage.swift */; };
 		D16078F92DD9EA1400603998 /* UserPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078F22DD9E7FB00603998 /* UserPage.swift */; };
 		D16078FA2DD9EA1B00603998 /* RepoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078F72DD9E91400603998 /* RepoPage.swift */; };
+		D16078FC2DD9EABB00603998 /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078FB2DD9EABB00603998 /* UserListViewModel.swift */; };
+		D16078FD2DD9EABB00603998 /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078FB2DD9EABB00603998 /* UserListViewModel.swift */; };
+		D16078FF2DD9EBBA00603998 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078FE2DD9EBBA00603998 /* UserTableViewCell.swift */; };
+		D16079002DD9EBBA00603998 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078FE2DD9EBBA00603998 /* UserTableViewCell.swift */; };
+		D16079032DD9EBDA00603998 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D16079022DD9EBDA00603998 /* SnapKit */; };
+		D16079052DD9EBF500603998 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16079042DD9EBF500603998 /* UserListViewController.swift */; };
+		D16079062DD9EBF500603998 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16079042DD9EBF500603998 /* UserListViewController.swift */; };
 		D168D1E62DD6D8C9008C7DB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D1E52DD6D8C9008C7DB9 /* AppDelegate.swift */; };
 		D168D1E82DD6D8C9008C7DB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D1E72DD6D8C9008C7DB9 /* SceneDelegate.swift */; };
-		D168D1EA2DD6D8C9008C7DB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D1E92DD6D8C9008C7DB9 /* ViewController.swift */; };
-		D168D1ED2DD6D8C9008C7DB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D168D1EB2DD6D8C9008C7DB9 /* Main.storyboard */; };
 		D168D1EF2DD6D8CB008C7DB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D168D1EE2DD6D8CB008C7DB9 /* Assets.xcassets */; };
 		D168D1F22DD6D8CB008C7DB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D168D1F02DD6D8CB008C7DB9 /* LaunchScreen.storyboard */; };
 		D168D1FD2DD6D8CB008C7DB9 /* GithubberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D1FC2DD6D8CB008C7DB9 /* GithubberTests.swift */; };
@@ -86,11 +91,12 @@
 		D16078F22DD9E7FB00603998 /* UserPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPage.swift; sourceTree = "<group>"; };
 		D16078F42DD9E90200603998 /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
 		D16078F72DD9E91400603998 /* RepoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoPage.swift; sourceTree = "<group>"; };
+		D16078FB2DD9EABB00603998 /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
+		D16078FE2DD9EBBA00603998 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		D16079042DD9EBF500603998 /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		D168D1E22DD6D8C9008C7DB9 /* Githubber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Githubber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D168D1E52DD6D8C9008C7DB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D168D1E72DD6D8C9008C7DB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D168D1E92DD6D8C9008C7DB9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D168D1EC2DD6D8C9008C7DB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D168D1EE2DD6D8CB008C7DB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D168D1F12DD6D8CB008C7DB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D168D1F32DD6D8CB008C7DB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -127,6 +133,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D168D2302DD98F44008C7DB9 /* RHNetworkAPI in Frameworks */,
+				D16079032DD9EBDA00603998 /* SnapKit in Frameworks */,
 				D168D22D2DD98F2A008C7DB9 /* RHCacheStoreAPI in Frameworks */,
 				D168D22A2DD98F11008C7DB9 /* RHCacheStore in Frameworks */,
 			);
@@ -152,6 +159,9 @@
 		D16078EC2DD9E79300603998 /* UserListPage */ = {
 			isa = PBXGroup;
 			children = (
+				D16078FB2DD9EABB00603998 /* UserListViewModel.swift */,
+				D16078FE2DD9EBBA00603998 /* UserTableViewCell.swift */,
+				D16079042DD9EBF500603998 /* UserListViewController.swift */,
 			);
 			path = UserListPage;
 			sourceTree = "<group>";
@@ -175,6 +185,13 @@
 			path = DomainModels;
 			sourceTree = "<group>";
 		};
+		D16079012DD9EBDA00603998 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D168D1D92DD6D8C9008C7DB9 = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +200,7 @@
 				D168D1FB2DD6D8CB008C7DB9 /* GithubberTests */,
 				D168D2052DD6D8CB008C7DB9 /* GithubberUITests */,
 				D168D1E32DD6D8C9008C7DB9 /* Products */,
+				D16079012DD9EBDA00603998 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -201,11 +219,9 @@
 			children = (
 				D168D1E52DD6D8C9008C7DB9 /* AppDelegate.swift */,
 				D168D1E72DD6D8C9008C7DB9 /* SceneDelegate.swift */,
-				D168D1E92DD6D8C9008C7DB9 /* ViewController.swift */,
 				D16078ED2DD9E7AD00603998 /* Presenters */,
 				D168D2522DD9BC4F008C7DB9 /* DomainLayer */,
 				D168D2322DD992A8008C7DB9 /* DataLayer */,
-				D168D1EB2DD6D8C9008C7DB9 /* Main.storyboard */,
 				D168D1EE2DD6D8CB008C7DB9 /* Assets.xcassets */,
 				D168D1F02DD6D8CB008C7DB9 /* LaunchScreen.storyboard */,
 				D168D1F32DD6D8CB008C7DB9 /* Info.plist */,
@@ -325,6 +341,7 @@
 				D168D2292DD98F11008C7DB9 /* RHCacheStore */,
 				D168D22C2DD98F2A008C7DB9 /* RHCacheStoreAPI */,
 				D168D22F2DD98F44008C7DB9 /* RHNetworkAPI */,
+				D16079022DD9EBDA00603998 /* SnapKit */,
 			);
 			productName = Githubber;
 			productReference = D168D1E22DD6D8C9008C7DB9 /* Githubber.app */;
@@ -422,7 +439,6 @@
 			files = (
 				D168D1F22DD6D8CB008C7DB9 /* LaunchScreen.storyboard in Resources */,
 				D168D1EF2DD6D8CB008C7DB9 /* Assets.xcassets in Resources */,
-				D168D1ED2DD6D8C9008C7DB9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,8 +464,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D168D2462DD9B26C008C7DB9 /* StoreUsersRepository.swift in Sources */,
+				D16078FF2DD9EBBA00603998 /* UserTableViewCell.swift in Sources */,
+				D16078FC2DD9EABB00603998 /* UserListViewModel.swift in Sources */,
 				D168D2512DD9BBFA008C7DB9 /* ReposPageContainer.swift in Sources */,
-				D168D1EA2DD6D8C9008C7DB9 /* ViewController.swift in Sources */,
 				D168D23C2DD9931D008C7DB9 /* RemoteUserRepository.swift in Sources */,
 				D168D2542DD9C23C008C7DB9 /* SearchUsersUseCase.swift in Sources */,
 				D16078F82DD9E91400603998 /* RepoPage.swift in Sources */,
@@ -462,6 +479,7 @@
 				D168D23A2DD992FE008C7DB9 /* UserReposPage.swift in Sources */,
 				D168D2202DD98DA4008C7DB9 /* SearchUserDTO.swift in Sources */,
 				D16078F32DD9E7FB00603998 /* UserPage.swift in Sources */,
+				D16079052DD9EBF500603998 /* UserListViewController.swift in Sources */,
 				D168D1E82DD6D8C9008C7DB9 /* SceneDelegate.swift in Sources */,
 				D168D21C2DD98D82008C7DB9 /* GitHubRepoDTO.swift in Sources */,
 				D16078F02DD9E7E800603998 /* User.swift in Sources */,
@@ -476,6 +494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D168D1FD2DD6D8CB008C7DB9 /* GithubberTests.swift in Sources */,
+				D16079002DD9EBBA00603998 /* UserTableViewCell.swift in Sources */,
 				D16078E42DD9C97000603998 /* SearchUsersUseCase.swift in Sources */,
 				D16078E62DD9C9A700603998 /* StoreUsersRepository.swift in Sources */,
 				D168D2262DD98E2E008C7DB9 /* APIEndToEndTests.swift in Sources */,
@@ -484,6 +503,7 @@
 				D168D2422DD99AC8008C7DB9 /* UserReposPage.swift in Sources */,
 				D168D2402DD99AC4008C7DB9 /* PublicUsersPage.swift in Sources */,
 				D16078F62DD9E90300603998 /* Repo.swift in Sources */,
+				D16078FD2DD9EABB00603998 /* UserListViewModel.swift in Sources */,
 				D16078E82DD9C9B500603998 /* UsersPageContainer.swift in Sources */,
 				D168D2482DD9B40C008C7DB9 /* StoreUsersRepositoryTests.swift in Sources */,
 				D168D23D2DD99322008C7DB9 /* RemoteUserRepository.swift in Sources */,
@@ -494,6 +514,7 @@
 				D16078EB2DD9CA4D00603998 /* GetUsersUseCaseTests.swift in Sources */,
 				D16078E72DD9C9AB00603998 /* StoreUsersReposRepository.swift in Sources */,
 				D16078E52DD9C97400603998 /* GetUsersUseCase.swift in Sources */,
+				D16079062DD9EBF500603998 /* UserListViewController.swift in Sources */,
 				D168D2412DD99AC6008C7DB9 /* SearchUsersPage.swift in Sources */,
 				D16078E92DD9C9BA00603998 /* ReposPageContainer.swift in Sources */,
 				D16078FA2DD9EA1B00603998 /* RepoPage.swift in Sources */,
@@ -528,14 +549,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D168D1EB2DD6D8C9008C7DB9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D168D1EC2DD6D8C9008C7DB9 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D168D1F02DD6D8CB008C7DB9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -678,7 +691,7 @@
 				INFOPLIST_FILE = Githubber/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -706,7 +719,7 @@
 				INFOPLIST_FILE = Githubber/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -875,6 +888,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D16079022DD9EBDA00603998 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D168D2272DD98EFA008C7DB9 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
 		D168D2292DD98F11008C7DB9 /* RHCacheStore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D168D2282DD98F11008C7DB9 /* XCRemoteSwiftPackageReference "RHCacheStore" */;
