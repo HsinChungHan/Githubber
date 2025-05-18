@@ -27,6 +27,8 @@ protocol GetUsersUseCaseProtocol {
                       freshnessMinutes: Int) async throws -> ReposPage
     
     func getUserAvatarData(from url: URL) async throws -> Data
+    func getUserDetail(username: String,
+                       freshnessMinutes: Int) async throws -> GitHubUserDTO
 }
 
 // MARK: - Implementation
@@ -183,5 +185,29 @@ extension GetUsersUseCase {
         let (data, _) = try await URLSession.shared.data(from: url)
         try await usersStore.saveUserAvatar(url: key, data: data)
         return data
+    }
+}
+
+// MARK: - User Detail
+extension GetUsersUseCase {
+    func getUserDetail(username: String,
+                       freshnessMinutes: Int) async throws -> GitHubUserDTO {
+        let now = Date().timeIntervalSince1970
+        let last = try await usersStore.getLastFetchTime()
+
+        if !needsRefresh(lastFetch: last, now: now, maxAge: freshnessMinutes),
+           let cachedDTO = try await usersStore.getUserDetail(username: username) {
+            return cachedDTO
+        }
+        
+        let result = await remoteRepo.fetchUser(username: username)
+        switch result {
+        case .success(let dto):
+            try await usersStore.saveUserDetail(username: username, dto: dto)
+            try await usersStore.saveLastFetchTime(now)
+            return dto
+        case .failure:
+            throw GetUsersUseCaseError.failedToGetPublicUsers
+        }
     }
 }

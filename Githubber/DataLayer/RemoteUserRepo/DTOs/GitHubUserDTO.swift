@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Single user detail  (/users/{username})
-struct GitHubUserDTO: Decodable {
+struct GitHubUserDTO: Codable {
     let login: String
     let id: Int
     let avatarUrl: URL           // avatar_url → avatarUrl

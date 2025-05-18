@@ -52,9 +52,11 @@ final class UserRepoViewModel {
     
     private func fetchDetail() {
         Task {
-            let result = await remoteRepo.fetchUser(username: username)
-            switch result {
-            case .success(let dto):
+            do {
+                let dto = try await useCase.getUserDetail(
+                    username: username,
+                    freshnessMinutes: 10
+                )
                 let detail = UserDetail(
                     username: dto.login,
                     fullName: dto.name,
@@ -62,12 +64,14 @@ final class UserRepoViewModel {
                     followers: dto.followers,
                     following: dto.following
                 )
-                DispatchQueue.main.async {
+                await MainActor.run {
                     self.userDetail = detail
                     self.onDetailUpdate?()
                 }
-            case .failure(let err):
-                DispatchQueue.main.async { self.onError?(err) }
+            } catch {
+                await MainActor.run {
+                    self.onError?(error)
+                }
             }
         }
     }

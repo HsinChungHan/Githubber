@@ -43,10 +43,14 @@ protocol StoreUsersRepositoryProtocol {
     func saveUsersPage(cursor: Int, page: PublicUsersPage) async throws
     func getUsersPage(cursor: Int) async throws -> PublicUsersPage
     
-    // Avatar
+    // User avatar
     func saveUserAvatar(url: String, data: Data) async throws
     func updateUserAvatar(url: String, data: Data) async throws
     func getUserAvatar(url: String) async throws -> Data?
+    
+    // User detail
+    func saveUserDetail(username: String, dto: GitHubUserDTO) async throws
+    func getUserDetail(username: String) async throws -> GitHubUserDTO?
 }
 
 // MARK: - Repository
@@ -191,6 +195,33 @@ extension StoreUsersRepository {
             }
             return data
         case .failure:
+            return nil
+        }
+    }
+}
+
+// MARK: - User detail
+extension StoreUsersRepository {
+    private func detailKey(for username: String) -> String {
+        "user_detail_\(username)"
+    }
+
+    func saveUserDetail(username: String, dto: GitHubUserDTO) async throws {
+        let data = try JSONEncoder().encode(dto)
+        let json = data.base64EncodedString()
+        try await store.insert(with: detailKey(for: username), json: json)
+    }
+
+    func getUserDetail(username: String) async throws -> GitHubUserDTO? {
+        let result = await store.retrieve(with: detailKey(for: username))
+        switch result {
+        case .found(let json):
+            if let b64 = json as? String,
+               let data = Data(base64Encoded: b64) {
+                return try JSONDecoder().decode(GitHubUserDTO.self, from: data)
+            }
+            return nil
+        case .empty, .failure:
             return nil
         }
     }
