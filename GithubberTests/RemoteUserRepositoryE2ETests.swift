@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import Githubber         // Module containing DTOs & repository
+@testable import Githubber         // Module containing DTOs & repos itory
 @testable import RHNetworkAPI           // Networking abstraction
 
 final class RemoteUserRepositoryE2ETests: XCTestCase {
