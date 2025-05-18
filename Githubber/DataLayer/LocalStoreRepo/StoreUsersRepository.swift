@@ -42,6 +42,11 @@ protocol StoreUsersRepositoryProtocol {
     // cursor-based users pages
     func saveUsersPage(cursor: Int, page: PublicUsersPage) async throws
     func getUsersPage(cursor: Int) async throws -> PublicUsersPage
+    
+    // Avatar
+    func saveUserAvatar(url: String, data: Data) async throws
+    func updateUserAvatar(url: String, data: Data) async throws
+    func getUserAvatar(url: String) async throws -> Data?
 }
 
 // MARK: - Repository
@@ -150,5 +155,43 @@ private extension StoreUsersRepository {
         
         let container = try JSONDecoder().decode(UsersPageContainer.self, from: data)
         return PublicUsersPage(users: container.users, nextSince: container.nextSince)
+    }
+}
+
+// MARK: - Store avatr
+extension StoreUsersRepository {
+
+    private func avatarKey(for url: String) -> String {
+        "avatar_\(url)"
+    }
+
+    func saveUserAvatar(url: String, data: Data) async throws {
+        let b64 = data.base64EncodedString()
+        do {
+            try await store.insert(with: avatarKey(for: url), json: b64)
+        } catch {
+            throw StoreUsersRepositoryError.failedSaveUsersPage
+        }
+    }
+
+    func updateUserAvatar(url: String, data: Data) async throws {
+        try await saveUserAvatar(url: url, data: data)
+    }
+
+    func getUserAvatar(url: String) async throws -> Data? {
+        let result = await store.retrieve(with: avatarKey(for: url))
+        switch result {
+        case .empty:
+            return nil
+        case let .found(json):
+            guard let b64 = json as? String,
+                  let data = Data(base64Encoded: b64)
+            else {
+                return nil
+            }
+            return data
+        case .failure:
+            return nil
+        }
     }
 }

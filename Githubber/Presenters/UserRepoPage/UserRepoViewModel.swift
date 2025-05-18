@@ -46,6 +46,10 @@ final class UserRepoViewModel {
         fetchRepos()
     }
 
+    func avatarData(from url: URL) async throws -> Data {
+        try await useCase.getUserAvatarData(from: url)
+    }
+    
     private func fetchDetail() {
         Task {
             let result = await remoteRepo.fetchUser(username: username)

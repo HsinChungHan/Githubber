@@ -69,6 +69,7 @@ final class UserListViewController: UIViewController {
         viewModel.onUpdate = { [weak self] in
             self?.tableView.reloadData()
         }
+        
         viewModel.onError = { [weak self] error in
             let alert = UIAlertController(
                 title: "Error",
@@ -78,6 +79,7 @@ final class UserListViewController: UIViewController {
             alert.addAction(.init(title: "OK", style: .default))
             self?.present(alert, animated: true)
         }
+        
         viewModel.onLoadingStatusChange = { [weak self] isLoading in
             // (footer indicator if needed)
         }
@@ -115,7 +117,7 @@ extension UserListViewController: UITableViewDataSource {
         ) as! UserTableViewCell
 
         let user = user(at: indexPath.row)
-        cell.configure(with: user)
+        cell.configure(with: user, avatarProvider: viewModel.avatarData(for:))
 
         viewModel.loadMoreIfNeeded(currentIndex: indexPath.row)
         return cell

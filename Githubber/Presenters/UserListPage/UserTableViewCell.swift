@@ -5,10 +5,6 @@
 //  Created by Chung Han Hsin on 2025/5/18.
 //
 
-import Foundation
-import UIKit
-import SnapKit
-
 import UIKit
 import SnapKit
 
@@ -16,8 +12,10 @@ final class UserTableViewCell: UITableViewCell {
     static let identifier = "UserTableViewCell"
 
     private let avatarImageView = UIImageView()
-    private let usernameLabel = UILabel()
-    private var imageLoadTask: URLSessionDataTask?
+    private let usernameLabel   = UILabel()
+    
+    /// 用來取消正在進行的 avatar 載入
+    private var avatarLoadTask: Task<Void, Never>?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -45,22 +43,40 @@ final class UserTableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
+        // 1. 取消任何正在跑的 avatar 載入
+        avatarLoadTask?.cancel()
         avatarImageView.image = nil
-        imageLoadTask?.cancel()
+        usernameLabel.text = nil
     }
 
-    func configure(with user: User) {
+    /// Configure cell with a User and an async avatar data provider
+    func configure(
+        with user: User,
+        avatarProvider: @escaping (URL) async throws -> Data
+    ) {
         usernameLabel.text = user.username
-        loadImage(from: user.avatarURL)
-    }
-
-    private func loadImage(from url: URL) {
-        imageLoadTask = URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
-            guard let data = data, let img = UIImage(data: data) else { return }
-            DispatchQueue.main.async {
-                self?.avatarImageView.image = img
+        
+        // 2. 先取消舊任務
+        avatarLoadTask?.cancel()
+        avatarImageView.image = nil
+        
+        // 3. 建立新 Task 來載入 avatar data
+        avatarLoadTask = Task {
+            do {
+                let data = try await avatarProvider(user.avatarURL)
+                // Task 被取消就不要再更新 UI
+                guard !Task.isCancelled else { return }
+                
+                if let img = UIImage(data: data) {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.avatarImageView.image = img
+                    }
+                }
+            } catch {
+                // 可以加上錯誤處理或 fallback 圖片
+                print("Failed to load avatar:", error)
             }
         }
-        imageLoadTask?.resume()
     }
 }
+

@@ -25,13 +25,15 @@ protocol GetUsersUseCaseProtocol {
                       page: Int,
                       perPage: Int,
                       freshnessMinutes: Int) async throws -> ReposPage
+    
+    func getUserAvatarData(from url: URL) async throws -> Data
 }
 
 // MARK: - Implementation
 final class GetUsersUseCase: GetUsersUseCaseProtocol {
 
     // Dependencies
-    private let remoteRepo: RemoteUserRepositoryProtocol    // :contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}
+    private let remoteRepo: RemoteUserRepositoryProtocol
     private let usersStore: StoreUsersRepositoryProtocol
     private let reposStore: StoreUsersReposRepositoryProtocol
 
@@ -118,13 +120,12 @@ final class GetUsersUseCase: GetUsersUseCaseProtocol {
             }
         }
 
-        // 轉成 Domain Model
         let domainRepos = dtoPage.repos.map { dto in
             Repo(name: dto.name,
                  language: dto.language,
                  stars: dto.stargazersCount,
                  description: dto.description,
-                 url: dto.htmlUrl)          // :contentReference[oaicite:4]{index=4}:contentReference[oaicite:5]{index=5}
+                 url: dto.htmlUrl)
         }
         return ReposPage(repos: domainRepos,
                          nextPage: dtoPage.nextPage)
@@ -169,5 +170,18 @@ final class GetUsersUseCase: GetUsersUseCaseProtocol {
         case .failure:
             throw GetUsersUseCaseError.failedToGetUserRepos
         }
+    }
+}
+
+// MARK: - User Avatar
+extension GetUsersUseCase {
+    func getUserAvatarData(from url: URL) async throws -> Data {
+        let key = url.absoluteString
+        if let cached = try await usersStore.getUserAvatar(url: key) {
+            return cached
+        }
+        let (data, _) = try await URLSession.shared.data(from: url)
+        try await usersStore.saveUserAvatar(url: key, data: data)
+        return data
     }
 }

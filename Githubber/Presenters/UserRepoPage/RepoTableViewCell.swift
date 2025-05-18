@@ -23,6 +23,7 @@ final class RepoTableViewCell: UITableViewCell {
         l.clipsToBounds = true
         return l
     }()
+    
     private let nameLabel = UILabel()
     private let descLabel: UILabel = {
         let l = UILabel()
@@ -31,11 +32,13 @@ final class RepoTableViewCell: UITableViewCell {
         l.numberOfLines = 2
         return l
     }()
+    
     private let starImageView: UIImageView = {
         let iv = UIImageView(image: UIImage(systemName: "star.fill"))
         iv.tintColor = .systemGray
         return iv
     }()
+    
     private let starCountLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle,
@@ -93,7 +96,6 @@ final class RepoTableViewCell: UITableViewCell {
         let langText = (repo.language?.isEmpty == false) ? repo.language! : "None"
         langBadge.text = " \(langText) "
         langBadge.isHidden = false
-
         nameLabel.text      = repo.name
         descLabel.text      = repo.description
         starCountLabel.text = "\(repo.stars)"

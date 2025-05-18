@@ -52,6 +52,11 @@ final class UserListViewModel {
         fetchNext()
     }
     
+    // MARK: - Internal methods
+    func avatarData(for url: URL) async throws -> Data {
+        try await useCase.getUserAvatarData(from: url)
+    }
+    
     // MARK: - Private
     
     private func fetchNext() {
