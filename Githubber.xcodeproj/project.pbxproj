@@ -37,6 +37,16 @@
 		D16079132DD9F63B00603998 /* RepoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16079112DD9F63B00603998 /* RepoTableViewCell.swift */; };
 		D16079152DD9FCA400603998 /* RepoWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16079142DD9FCA400603998 /* RepoWebViewController.swift */; };
 		D16079162DD9FCA400603998 /* RepoWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16079142DD9FCA400603998 /* RepoWebViewController.swift */; };
+		D16079182DDA14F200603998 /* StoreFavoriteReposRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16079172DDA14F200603998 /* StoreFavoriteReposRepository.swift */; };
+		D16079192DDA14F200603998 /* StoreFavoriteReposRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16079172DDA14F200603998 /* StoreFavoriteReposRepository.swift */; };
+		D160791C2DDA153F00603998 /* FavoriteReposUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D160791B2DDA153F00603998 /* FavoriteReposUseCase.swift */; };
+		D160791D2DDA153F00603998 /* FavoriteReposUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D160791B2DDA153F00603998 /* FavoriteReposUseCase.swift */; };
+		D160791F2DDA156700603998 /* FavoriteReposViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D160791E2DDA156700603998 /* FavoriteReposViewModel.swift */; };
+		D16079202DDA156700603998 /* FavoriteReposViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D160791E2DDA156700603998 /* FavoriteReposViewModel.swift */; };
+		D16079222DDA157F00603998 /* FavoriteReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16079212DDA157F00603998 /* FavoriteReposViewController.swift */; };
+		D16079232DDA157F00603998 /* FavoriteReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16079212DDA157F00603998 /* FavoriteReposViewController.swift */; };
+		D16079262DDA17A700603998 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16079252DDA17A700603998 /* MainTabBarController.swift */; };
+		D16079272DDA17A700603998 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16079252DDA17A700603998 /* MainTabBarController.swift */; };
 		D168D1E62DD6D8C9008C7DB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D1E52DD6D8C9008C7DB9 /* AppDelegate.swift */; };
 		D168D1E82DD6D8C9008C7DB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D1E72DD6D8C9008C7DB9 /* SceneDelegate.swift */; };
 		D168D1EF2DD6D8CB008C7DB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D168D1EE2DD6D8CB008C7DB9 /* Assets.xcassets */; };
@@ -106,6 +116,11 @@
 		D160790E2DD9F34600603998 /* UserRepoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepoViewController.swift; sourceTree = "<group>"; };
 		D16079112DD9F63B00603998 /* RepoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoTableViewCell.swift; sourceTree = "<group>"; };
 		D16079142DD9FCA400603998 /* RepoWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoWebViewController.swift; sourceTree = "<group>"; };
+		D16079172DDA14F200603998 /* StoreFavoriteReposRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreFavoriteReposRepository.swift; sourceTree = "<group>"; };
+		D160791B2DDA153F00603998 /* FavoriteReposUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteReposUseCase.swift; sourceTree = "<group>"; };
+		D160791E2DDA156700603998 /* FavoriteReposViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteReposViewModel.swift; sourceTree = "<group>"; };
+		D16079212DDA157F00603998 /* FavoriteReposViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteReposViewController.swift; sourceTree = "<group>"; };
+		D16079252DDA17A700603998 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		D168D1E22DD6D8C9008C7DB9 /* Githubber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Githubber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D168D1E52DD6D8C9008C7DB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D168D1E72DD6D8C9008C7DB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -181,6 +196,8 @@
 		D16078ED2DD9E7AD00603998 /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				D16079242DDA179900603998 /* MainTabBar */,
+				D160791A2DDA152D00603998 /* FavoriteReposPage */,
 				D160790A2DD9F28800603998 /* UserRepoPage */,
 				D16078EC2DD9E79300603998 /* UserListPage */,
 			);
@@ -214,6 +231,23 @@
 				D16079142DD9FCA400603998 /* RepoWebViewController.swift */,
 			);
 			path = UserRepoPage;
+			sourceTree = "<group>";
+		};
+		D160791A2DDA152D00603998 /* FavoriteReposPage */ = {
+			isa = PBXGroup;
+			children = (
+				D160791E2DDA156700603998 /* FavoriteReposViewModel.swift */,
+				D16079212DDA157F00603998 /* FavoriteReposViewController.swift */,
+			);
+			path = FavoriteReposPage;
+			sourceTree = "<group>";
+		};
+		D16079242DDA179900603998 /* MainTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				D16079252DDA17A700603998 /* MainTabBarController.swift */,
+			);
+			path = MainTabBar;
 			sourceTree = "<group>";
 		};
 		D168D1D92DD6D8C9008C7DB9 = {
@@ -321,6 +355,7 @@
 			children = (
 				D168D24D2DD9BB9F008C7DB9 /* DTOs */,
 				D168D2452DD9B26C008C7DB9 /* StoreUsersRepository.swift */,
+				D16079172DDA14F200603998 /* StoreFavoriteReposRepository.swift */,
 				D168D2492DD9B822008C7DB9 /* StoreUsersReposRepository.swift */,
 			);
 			path = LocalStoreRepo;
@@ -340,6 +375,7 @@
 			children = (
 				D16078EE2DD9E7D600603998 /* DomainModels */,
 				D168D2532DD9C23C008C7DB9 /* SearchUsersUseCase.swift */,
+				D160791B2DDA153F00603998 /* FavoriteReposUseCase.swift */,
 				D168D2552DD9C25E008C7DB9 /* GetUsersUseCase.swift */,
 			);
 			path = DomainLayer;
@@ -491,11 +527,13 @@
 				D16078FF2DD9EBBA00603998 /* UserTableViewCell.swift in Sources */,
 				D16078FC2DD9EABB00603998 /* UserListViewModel.swift in Sources */,
 				D168D2512DD9BBFA008C7DB9 /* ReposPageContainer.swift in Sources */,
+				D160791F2DDA156700603998 /* FavoriteReposViewModel.swift in Sources */,
 				D168D23C2DD9931D008C7DB9 /* RemoteUserRepository.swift in Sources */,
 				D168D2542DD9C23C008C7DB9 /* SearchUsersUseCase.swift in Sources */,
 				D16078F82DD9E91400603998 /* RepoPage.swift in Sources */,
 				D168D2562DD9C25E008C7DB9 /* GetUsersUseCase.swift in Sources */,
 				D168D24F2DD9BBC1008C7DB9 /* UsersPageContainer.swift in Sources */,
+				D16079262DDA17A700603998 /* MainTabBarController.swift in Sources */,
 				D16078F52DD9E90200603998 /* Repo.swift in Sources */,
 				D168D21E2DD98D95008C7DB9 /* SearchUsersResponseDTO.swift in Sources */,
 				D16079122DD9F63B00603998 /* RepoTableViewCell.swift in Sources */,
@@ -507,9 +545,12 @@
 				D168D2202DD98DA4008C7DB9 /* SearchUserDTO.swift in Sources */,
 				D16078F32DD9E7FB00603998 /* UserPage.swift in Sources */,
 				D16079052DD9EBF500603998 /* UserListViewController.swift in Sources */,
+				D160791C2DDA153F00603998 /* FavoriteReposUseCase.swift in Sources */,
 				D168D1E82DD6D8C9008C7DB9 /* SceneDelegate.swift in Sources */,
 				D168D21C2DD98D82008C7DB9 /* GitHubRepoDTO.swift in Sources */,
+				D16079222DDA157F00603998 /* FavoriteReposViewController.swift in Sources */,
 				D16079152DD9FCA400603998 /* RepoWebViewController.swift in Sources */,
+				D16079182DDA14F200603998 /* StoreFavoriteReposRepository.swift in Sources */,
 				D16078F02DD9E7E800603998 /* User.swift in Sources */,
 				D168D2362DD992DB008C7DB9 /* PublicUsersPage.swift in Sources */,
 				D168D2382DD992EE008C7DB9 /* SearchUsersPage.swift in Sources */,
@@ -526,11 +567,13 @@
 				D160790D2DD9F30400603998 /* UserRepoViewModel.swift in Sources */,
 				D16079002DD9EBBA00603998 /* UserTableViewCell.swift in Sources */,
 				D16078E42DD9C97000603998 /* SearchUsersUseCase.swift in Sources */,
+				D160791D2DDA153F00603998 /* FavoriteReposUseCase.swift in Sources */,
 				D16078E62DD9C9A700603998 /* StoreUsersRepository.swift in Sources */,
 				D168D2262DD98E2E008C7DB9 /* APIEndToEndTests.swift in Sources */,
 				D168D2582DD9C32C008C7DB9 /* SearchUsersUseCaseTests.swift in Sources */,
 				D16078F92DD9EA1400603998 /* UserPage.swift in Sources */,
 				D16079162DD9FCA400603998 /* RepoWebViewController.swift in Sources */,
+				D16079272DDA17A700603998 /* MainTabBarController.swift in Sources */,
 				D168D2422DD99AC8008C7DB9 /* UserReposPage.swift in Sources */,
 				D168D2402DD99AC4008C7DB9 /* PublicUsersPage.swift in Sources */,
 				D16078F62DD9E90300603998 /* Repo.swift in Sources */,
@@ -540,9 +583,12 @@
 				D168D23D2DD99322008C7DB9 /* RemoteUserRepository.swift in Sources */,
 				D16078F12DD9E7F000603998 /* User.swift in Sources */,
 				D168D23F2DD9954F008C7DB9 /* RemoteUserRepositoryE2ETests.swift in Sources */,
+				D16079232DDA157F00603998 /* FavoriteReposViewController.swift in Sources */,
 				D168D2232DD98DC0008C7DB9 /* SearchUsersResponseDTO.swift in Sources */,
+				D16079192DDA14F200603998 /* StoreFavoriteReposRepository.swift in Sources */,
 				D168D2242DD98DC2008C7DB9 /* SearchUserDTO.swift in Sources */,
 				D16078EB2DD9CA4D00603998 /* GetUsersUseCaseTests.swift in Sources */,
+				D16079202DDA156700603998 /* FavoriteReposViewModel.swift in Sources */,
 				D16078E72DD9C9AB00603998 /* StoreUsersReposRepository.swift in Sources */,
 				D16078E52DD9C97400603998 /* GetUsersUseCase.swift in Sources */,
 				D16079062DD9EBF500603998 /* UserListViewController.swift in Sources */,

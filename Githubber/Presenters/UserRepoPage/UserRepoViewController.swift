@@ -173,7 +173,6 @@ extension UserRepoViewController: UITableViewDataSource {
         return cell
     }
 
-    // Section header 顯示 "Repositories"
     func tableView(_ tv: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
         let header = UIView()
@@ -188,9 +187,22 @@ extension UserRepoViewController: UITableViewDataSource {
         }
         return header
     }
+    
     func tableView(_ tv: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
         44
+    }
+    
+    func tableView(_ tv: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt ip: IndexPath)
+    -> UISwipeActionsConfiguration? {
+        let repo = viewModel.repos[ip.row]
+        let action = UIContextualAction(style: .normal, title: "Favorite") { [weak self] _, _, cb in
+            self?.viewModel.favoriteRepo(repo)
+            cb(true)
+        }
+        action.backgroundColor = .systemOrange
+        return UISwipeActionsConfiguration(actions: [action])
     }
 }
 

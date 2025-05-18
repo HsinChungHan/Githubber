@@ -11,19 +11,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    func scene(_ scene: UIScene,
+               willConnectTo session: UISceneSession,
+               options connectionOptions: UIScene.ConnectionOptions) {
+
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let remoteUsersRepo = RemoteUserRepository()
-        let localUsersStore = StoreUsersRepository()
-        let usersRepoStore = StoreUsersReposRepository()
-        let useCase = GetUsersUseCase.init(remoteRepo: remoteUsersRepo, usersStore: localUsersStore, reposStore: usersRepoStore)
-        let viewModel = UserListViewModel(useCase: useCase)
-        let rootViewController = UserListViewController(viewModel: viewModel, remoteRepo: remoteUsersRepo)
+
+        // 1. 建立 MainTabBarController
+        let tabBar = MainTabBarController()
+
+        // 2. 建立 window 並指定 tabBar 為 root
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = UINavigationController(rootViewController: rootViewController)
+        window.rootViewController = tabBar
         self.window = window
         window.makeKeyAndVisible()
-        
     }
 }
-

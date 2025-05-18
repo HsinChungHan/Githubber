@@ -132,7 +132,6 @@ extension UserListViewController: UITableViewDelegate {
         tv.deselectRow(at: ip, animated: true)
         let user = user(at: ip.row)
 
-        // 建立新的 UseCase 實例（或重用現有的）
         let usersStore = StoreUsersRepository()
         let reposStore = StoreUsersReposRepository()
         let repoUseCase = GetUsersUseCase(
@@ -144,7 +143,8 @@ extension UserListViewController: UITableViewDelegate {
         let repoVM = UserRepoViewModel(
             username: user.username,
             useCase: repoUseCase,
-            remoteRepo: remoteRepo
+            remoteRepo: remoteRepo, 
+            favoriteUseCase: viewModel.favoriteUseCase
         )
         let repoVC = UserRepoViewController(viewModel: repoVM)
         navigationController?.pushViewController(repoVC, animated: true)

@@ -14,6 +14,7 @@ final class UserListViewModel {
     
     // MARK: - Dependencies
     let useCase: GetUsersUseCaseProtocol
+    let favoriteUseCase: FavoriteReposUseCaseProtocol
     private let perPage: Int
     
     // MARK: - Pagination State
@@ -30,8 +31,10 @@ final class UserListViewModel {
     
     // MARK: - Init
     init(useCase: GetUsersUseCaseProtocol,
+         favoriteUseCase: FavoriteReposUseCaseProtocol,
          perPage: Int = 30) {
         self.useCase = useCase
+        self.favoriteUseCase = favoriteUseCase
         self.perPage = perPage
     }
     

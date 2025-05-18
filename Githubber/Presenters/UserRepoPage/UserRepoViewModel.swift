@@ -22,6 +22,7 @@ final class UserRepoViewModel {
     let username: String
     private let useCase: GetUsersUseCaseProtocol
     private let remoteRepo: RemoteUserRepositoryProtocol
+    private let favoriteUseCase: FavoriteReposUseCaseProtocol
 
     // MARK: - Outputs
     private(set) var userDetail: UserDetail?
@@ -34,10 +35,12 @@ final class UserRepoViewModel {
 
     init(username: String,
          useCase: GetUsersUseCaseProtocol,
-         remoteRepo: RemoteUserRepositoryProtocol) {
-        self.username   = username
-        self.useCase    = useCase
-        self.remoteRepo = remoteRepo
+         remoteRepo: RemoteUserRepositoryProtocol,
+         favoriteUseCase: FavoriteReposUseCaseProtocol) {
+        self.username        = username
+        self.useCase         = useCase
+        self.remoteRepo      = remoteRepo
+        self.favoriteUseCase = favoriteUseCase
     }
 
     /// 同時載入使用者資料 & Repo 清單
@@ -48,6 +51,18 @@ final class UserRepoViewModel {
 
     func avatarData(from url: URL) async throws -> Data {
         try await useCase.getUserAvatarData(from: url)
+    }
+    
+    func favoriteRepo(_ repo: Repo) {
+        Task {
+            do {
+                try await favoriteUseCase.addFavorite(repo)
+            } catch {
+                await MainActor.run {
+                    self.onError?(error)
+                }
+            }
+        }
     }
     
     private func fetchDetail() {
