@@ -11,18 +11,19 @@ import XCTest
 @testable import RHCacheStore
 
 // MARK: - Mock RemoteUserRepository
-final class MockRemoteUserRepo: RemoteUserRepositoryProtocol {
 
+final class MockRemoteUserRepo: RemoteUserRepositoryProtocol {
     // Stubbed responses
     var publicUsersResult: Result<PublicUsersPage, RemoteUserRepositoryError> = .failure(.listUsers)
     var reposResult: Result<UserReposPage, RemoteUserRepositoryError>        = .failure(.listRepos)
+    var userDetailResult: Result<GitHubUserDTO, RemoteUserRepositoryError>  = .failure(.getUser)
 
     func fetchPublicUsers(since: Int, perPage: Int) async -> Result<PublicUsersPage, RemoteUserRepositoryError> {
         return publicUsersResult
     }
 
     func fetchUser(username: String) async -> Result<GitHubUserDTO, RemoteUserRepositoryError> {
-        .failure(.getUser)
+        return userDetailResult
     }
 
     func fetchUserRepos(username: String, page: Int, perPage: Int) async -> Result<UserReposPage, RemoteUserRepositoryError> {
@@ -30,52 +31,74 @@ final class MockRemoteUserRepo: RemoteUserRepositoryProtocol {
     }
 
     func searchUsers(query: String, page: Int, perPage: Int) async -> Result<SearchUsersPage, RemoteUserRepositoryError> {
-        .failure(.searchUsers)
+        return .failure(.searchUsers)
     }
 }
 
 // MARK: - In-memory Stores
 
 actor MockUsersStore: StoreUsersRepositoryProtocol {
-    var lastFetch: TimeInterval = TimeInterval.leastNormalMagnitude
-    var pages: [Int: PublicUsersPage] = [:]
+    // Avatar cache stubs
+    func saveUserAvatar(url: String, data: Data) async throws {}
+    func updateUserAvatar(url: String, data: Data) async throws {}
+    func getUserAvatar(url: String) async throws -> Data? { nil }
 
-    // Users
-    func saveUsersPage(cursor: Int, page: PublicUsersPage) async throws { pages[cursor] = page }
-    func getUsersPage(cursor: Int) async throws -> PublicUsersPage {
-        guard let p = pages[cursor] else { throw StoreUsersRepositoryError.usersPageNotFound }
-        return p
+    // User detail cache
+    private var detailLastFetch: [String: TimeInterval] = [:]
+    private var cachedDetails: [String: GitHubUserDTO] = [:]
+    func saveUserDetail(username: String, dto: GitHubUserDTO) async throws {
+        cachedDetails[username] = dto
+    }
+    func getUserDetail(username: String) async throws -> GitHubUserDTO? {
+        return cachedDetails[username]
+    }
+    func saveLastDetailFetchTime(username: String, ts: TimeInterval) async throws {
+        detailLastFetch[username] = ts
+    }
+    func getLastDetailFetchTime(username: String) async throws -> TimeInterval {
+        return detailLastFetch[username] ?? .leastNormalMagnitude
     }
 
-    // Timestamps
-    func saveLastFetchTime(_ ts: TimeInterval) async throws { lastFetch = ts }
-    func getLastFetchTime() async throws -> TimeInterval { lastFetch }
+    // Public users cache
+    var lastFetch: TimeInterval = .leastNormalMagnitude
+    var pages: [Int: PublicUsersPage] = [:]
+    func saveUsersPage(cursor: Int, page: PublicUsersPage) async throws {
+        pages[cursor] = page
+    }
+    func getUsersPage(cursor: Int) async throws -> PublicUsersPage {
+        guard let p = pages[cursor] else {
+            throw StoreUsersRepositoryError.usersPageNotFound
+        }
+        return p
+    }
+    func saveLastFetchTime(_ ts: TimeInterval) async throws {
+        lastFetch = ts
+    }
+    func getLastFetchTime() async throws -> TimeInterval {
+        lastFetch
+    }
 }
 
 actor MockReposStore: StoreUsersReposRepositoryProtocol {
     var lastFetch: [String: TimeInterval] = [:]
     var pages: [String: [Int: UserReposPage]] = [:]
 
-    // Repos
     func saveReposPage(username: String, page: Int, pageData: UserReposPage) async throws {
         var dict = pages[username] ?? [:]
         dict[page] = pageData
         pages[username] = dict
     }
-
     func getReposPage(username: String, page: Int) async throws -> UserReposPage {
         guard let p = pages[username]?[page] else {
             throw StoreUsersReposRepositoryError.reposPageNotFound
         }
         return p
     }
-
-    // Timestamps
     func saveLastFetchTime(username: String, ts: TimeInterval) async throws {
         lastFetch[username] = ts
     }
     func getLastFetchTime(username: String) async throws -> TimeInterval {
-        lastFetch[username] ?? TimeInterval.leastNormalMagnitude
+        lastFetch[username] ?? .leastNormalMagnitude
     }
 }
 
@@ -92,9 +115,11 @@ final class GetUsersUseCaseTests: XCTestCase {
         mockRemote = MockRemoteUserRepo()
         userStore  = MockUsersStore()
         repoStore  = MockReposStore()
-        useCase    = GetUsersUseCase(remoteRepo: mockRemote,
-                                     usersStore: userStore,
-                                     reposStore: repoStore)
+        useCase    = GetUsersUseCase(
+            remoteRepo: mockRemote,
+            usersStore: userStore,
+            reposStore: repoStore
+        )
     }
 
     override func tearDown() async throws {
@@ -106,39 +131,43 @@ final class GetUsersUseCaseTests: XCTestCase {
 
     // MARK: - Public users
 
-    /// Should return local cache when still fresh
     func test_getUsers_usesLocalCache_whenFresh() async throws {
-        // Prepare local cache with DTO
-        let dto = SearchUserDTO(login: "octocat", id: 1, avatarUrl: URL(string: "https://")!)
+        let dto = SearchUserDTO(
+            login: "octocat",
+            id: 1,
+            avatarUrl: URL(string: "https://")!
+        )
         let cachedDTOPage = PublicUsersPage(users: [dto], nextSince: 135)
         try await userStore.saveUsersPage(cursor: 0, page: cachedDTOPage)
         try await userStore.saveLastFetchTime(Date().timeIntervalSince1970)
 
-        // Call domain-facing API
-        let page = try await useCase.getUsers(cursor: 0,
-                                              perPage: 30,
-                                              freshnessMinutes: 30)
+        let page = try await useCase.getUsers(
+            cursor: 0,
+            perPage: 30,
+            freshnessMinutes: 30
+        )
 
-        // Domain model has mapped username
         XCTAssertEqual(page.users.first?.username, "octocat")
         XCTAssertEqual(page.nextSince, 135)
     }
 
-    /// Should hit remote and update cache when stale
     func test_getUsers_fetchRemote_whenStale() async throws {
-        // Local outdated timestamp
         try await userStore.saveLastFetchTime(Date().timeIntervalSince1970 - 4000)
 
-        // Remote returns new DTO page
-        let dto = SearchUserDTO(login: "newuser", id: 9, avatarUrl: URL(string: "https://")!)
+        let dto = SearchUserDTO(
+            login: "newuser",
+            id: 9,
+            avatarUrl: URL(string: "https://")!
+        )
         let remoteDTOPage = PublicUsersPage(users: [dto], nextSince: 200)
         mockRemote.publicUsersResult = .success(remoteDTOPage)
 
-        let page = try await useCase.getUsers(cursor: 0,
-                                              perPage: 30,
-                                              freshnessMinutes: 30)
+        let page = try await useCase.getUsers(
+            cursor: 0,
+            perPage: 30,
+            freshnessMinutes: 30
+        )
 
-        // Assert returned domain page & cache updated
         XCTAssertEqual(page.users.first?.username, "newuser")
         XCTAssertEqual(page.nextSince, 200)
 
@@ -146,23 +175,44 @@ final class GetUsersUseCaseTests: XCTestCase {
         XCTAssertEqual(cachedDTO.users.first?.login, "newuser")
     }
 
+    func test_getUsers_remoteFailure_throwsError() async throws {
+        mockRemote.publicUsersResult = .failure(.listUsers)
+
+        do {
+            _ = try await useCase.getUsers(
+                cursor: 0,
+                perPage: 30,
+                freshnessMinutes: 0
+            )
+            XCTFail("Expected failedToGetPublicUsers error")
+        } catch let err as GetUsersUseCaseError {
+            XCTAssertEqual(err, .failedToGetPublicUsers)
+        }
+    }
+
     // MARK: - User repos
 
     func test_getUserRepos_usesLocalCache_whenFresh() async throws {
-        let dto = GitHubRepoDTO(name: "Sample", language: nil,
-                               stargazersCount: 0, description: nil,
-                               fork: false, htmlUrl: URL(string: "https://")!)
+        let dto = GitHubRepoDTO(
+            name: "Sample",
+            language: nil,
+            stargazersCount: 0,
+            description: nil,
+            fork: false,
+            htmlUrl: URL(string: "https://")!
+        )
         let cachedDTOPage = UserReposPage(repos: [dto], nextPage: nil)
         try await repoStore.saveReposPage(username: "octocat", page: 1, pageData: cachedDTOPage)
         try await repoStore.saveLastFetchTime(username: "octocat",
                                               ts: Date().timeIntervalSince1970)
 
-        let result = try await useCase.getUserRepos(username: "octocat",
-                                                    page: 1,
-                                                    perPage: 30,
-                                                    freshnessMinutes: 30)
+        let result = try await useCase.getUserRepos(
+            username: "octocat",
+            page: 1,
+            perPage: 30,
+            freshnessMinutes: 30
+        )
 
-        // Domain Repo maps name
         XCTAssertEqual(result.repos.first?.name, "Sample")
         XCTAssertNil(result.nextPage)
     }
@@ -171,19 +221,23 @@ final class GetUsersUseCaseTests: XCTestCase {
         try await repoStore.saveLastFetchTime(username: "octocat",
                                               ts: Date().timeIntervalSince1970 - 5000)
 
-        let dto = GitHubRepoDTO(name: "Remote",
-                                language: "Swift",
-                                stargazersCount: 100,
-                                description: nil,
-                                fork: false,
-                                htmlUrl: URL(string: "https://")!)
+        let dto = GitHubRepoDTO(
+            name: "Remote",
+            language: "Swift",
+            stargazersCount: 100,
+            description: nil,
+            fork: false,
+            htmlUrl: URL(string: "https://")!
+        )
         let remoteDTOPage = UserReposPage(repos: [dto], nextPage: 2)
         mockRemote.reposResult = .success(remoteDTOPage)
 
-        let result = try await useCase.getUserRepos(username: "octocat",
-                                                    page: 1,
-                                                    perPage: 30,
-                                                    freshnessMinutes: 30)
+        let result = try await useCase.getUserRepos(
+            username: "octocat",
+            page: 1,
+            perPage: 30,
+            freshnessMinutes: 30
+        )
 
         XCTAssertEqual(result.repos.first?.name, "Remote")
         XCTAssertEqual(result.nextPage, 2)
@@ -192,15 +246,35 @@ final class GetUsersUseCaseTests: XCTestCase {
         XCTAssertEqual(cachedDTO.repos.first?.name, "Remote")
     }
 
-    // MARK: - Error handling
+    // MARK: - User detail
 
-    func test_getUsers_remoteFailure_throwsError() async throws {
-        mockRemote.publicUsersResult = .failure(.listUsers)
+    func test_getUserDetail_fetchRemote_whenStale() async throws {
+        try await userStore.saveLastDetailFetchTime(username: "octocat",
+                                                    ts: Date().timeIntervalSince1970 - 4000)
+
+        let dto = GitHubUserDTO.init(login: "newuser", id: 9, avatarUrl: URL(string: "https://")!, name: "New User", followers: 5, following: 2)
+        
+        mockRemote.userDetailResult = .success(dto)
+
+        let result = try await useCase.getUserDetail(
+            username: "newuser",
+            freshnessMinutes: 30
+        )
+        XCTAssertEqual(result.login, "newuser")
+        XCTAssertEqual(result.name, "New User")
+
+        let cached = try await userStore.getUserDetail(username: "newuser")
+        XCTAssertEqual(cached?.login, "newuser")
+    }
+
+    func test_getUserDetail_remoteFailure_throwsError() async throws {
+        mockRemote.userDetailResult = .failure(.getUser)
 
         do {
-            _ = try await useCase.getUsers(cursor: 0,
-                                           perPage: 30,
-                                           freshnessMinutes: 0)
+            _ = try await useCase.getUserDetail(
+                username: "octocat",
+                freshnessMinutes: 0
+            )
             XCTFail("Expected failedToGetPublicUsers error")
         } catch let err as GetUsersUseCaseError {
             XCTAssertEqual(err, .failedToGetPublicUsers)
