@@ -6,8 +6,15 @@
 //
 
 import Foundation
+
+// MARK: - User list item  (/users  &  /search/users items[])
 struct SearchUserDTO: Decodable {
     let login: String
     let id: Int
-    let avatar_url: URL
+    let avatarUrl: URL           // avatar_url → avatarUrl
+
+    private enum CodingKeys: String, CodingKey {
+        case login, id
+        case avatarUrl = "avatar_url"
+    }
 }

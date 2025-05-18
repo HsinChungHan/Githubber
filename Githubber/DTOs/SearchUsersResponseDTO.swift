@@ -6,8 +6,16 @@
 //
 
 import Foundation
+
+// MARK: - Search users response  (/search/users)
 struct SearchUsersResponseDTO: Decodable {
-    let total_count: Int
-    let incomplete_results: Bool
+    let totalCount: Int          // total_count → totalCount
+    let incompleteResults: Bool  // incomplete_results → incompleteResults
     let items: [SearchUserDTO]
+
+    private enum CodingKeys: String, CodingKey {
+        case totalCount       = "total_count"
+        case incompleteResults = "incomplete_results"
+        case items
+    }
 }

@@ -47,7 +47,7 @@ final class GitHubAPIE2ETests: XCTestCase {
 
         XCTAssertTrue(repos.contains { $0.name == "Hello-World" })
         if let first = repos.first {
-            XCTAssertGreaterThanOrEqual(first.stargazers_count, 0)
+            XCTAssertGreaterThanOrEqual(first.stargazersCount, 0)
         }
     }
 
@@ -71,8 +71,8 @@ final class GitHubAPIE2ETests: XCTestCase {
             XCTAssertTrue(user.login.lowercased().contains("tom"),
                           "\(user.login) does not contain 'tom'")
         }
-        XCTAssertGreaterThan(result.total_count, 0)
-        XCTAssertFalse(result.incomplete_results, "incomplete_results should be false")
+        XCTAssertGreaterThan(result.totalCount, 0)
+        XCTAssertFalse(result.incompleteResults, "incomplete_results should be false")
     }
 
     /// Covers: GET /users  (public user listing)
@@ -94,9 +94,9 @@ final class GitHubAPIE2ETests: XCTestCase {
         XCTAssertEqual(ids, ids.sorted(), "User IDs should be ascending")
 
         // Basic field sanity check (first 10 users)
-        for u in users.prefix(10) {
-            XCTAssertFalse(u.login.isEmpty)
-            XCTAssertNotNil(URL(string: u.avatar_url.absoluteString))
+        for user in users.prefix(10) {
+            XCTAssertFalse(user.login.isEmpty)
+            XCTAssertNotNil(URL(string: user.avatarUrl.absoluteString))
         }
     }
 
