@@ -1,0 +1,43 @@
+{
+  "configurations" : [
+    {
+      "id" : "9E8EE2BB-ED72-49C8-8C11-BC62E876E19D",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "environmentVariableEntries" : [
+      {
+        "key" : "GITHUB_PAT",
+        "value" : "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"
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Githubber.xcodeproj",
+      "identifier" : "D168D1E12DD6D8C9008C7DB9",
+      "name" : "Githubber"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Githubber.xcodeproj",
+        "identifier" : "D168D1F72DD6D8CB008C7DB9",
+        "name" : "GithubberTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Githubber.xcodeproj",
+        "identifier" : "D168D2012DD6D8CB008C7DB9",
+        "name" : "GithubberUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
