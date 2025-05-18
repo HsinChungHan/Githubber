@@ -13,7 +13,7 @@ import Foundation
 final class UserListViewModel {
     
     // MARK: - Dependencies
-    private let useCase: GetUsersUseCaseProtocol
+    let useCase: GetUsersUseCaseProtocol
     private let perPage: Int
     
     // MARK: - Pagination State
