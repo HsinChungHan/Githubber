@@ -5,25 +5,28 @@
 //  Created by Chung Han Hsin on 2025/5/18.
 //
 
+// UserListViewModel.swift
+
 import Foundation
 
-/// ViewModel only exposes domain models externally and does not depend on any DTO
+/// ViewModel only exposes domain models externally.
 final class UserListViewModel {
     
     // MARK: - Dependencies
-    private let useCase: GetUsersUseCaseProtocol    // Directly calls getUsers(cursor:perPage:freshnessMinutes:)
-    private let perPage: Int                        // Number of items to fetch per page
+    private let useCase: GetUsersUseCaseProtocol
+    private let perPage: Int
     
     // MARK: - Pagination State
-    private var nextCursor: Int? = 0               // Cursor for pagination
-    private(set) var isLoading = false             // Indicates if a fetch is in progress
+    private var nextCursor: Int? = 0
+    private(set) var isLoading = false
     
     // MARK: - Data exposed to View
-    private(set) var users: [User] = []            // User is a domain model
+    private(set) var users: [User] = []
     
     // MARK: - Callbacks
-    var onUpdate: (() -> Void)?                    // Called when data is updated
-    var onError: ((Error) -> Void)?                // Called when an error occurs
+    var onUpdate: (() -> Void)?
+    var onError: ((Error) -> Void)?
+    var onLoadingStatusChange: ((Bool) -> Void)?    // ← 新增
     
     // MARK: - Init
     init(useCase: GetUsersUseCaseProtocol,
@@ -34,14 +37,12 @@ final class UserListViewModel {
     
     // MARK: - Public
     
-    /// Load the first page of users
     func loadInitial() {
         users.removeAll()
         nextCursor = 0
         fetchNext()
     }
     
-    /// Load the next page when the last item is displayed
     func loadMoreIfNeeded(currentIndex: Int) {
         guard !isLoading,
               let cursor = nextCursor,
@@ -56,27 +57,32 @@ final class UserListViewModel {
     private func fetchNext() {
         guard let cursor = nextCursor, !isLoading else { return }
         isLoading = true
+        // notify loading started
+        DispatchQueue.main.async { [weak self] in
+            self?.onLoadingStatusChange?(true)
+        }
         
         Task {
             do {
-                // Call the use case to fetch the paginated domain model
                 let page = try await useCase.getUsers(
                     cursor: cursor,
                     perPage: perPage,
                     freshnessMinutes: 5
                 )
-                
-                // Update local state and notify the view
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     self.users.append(contentsOf: page.users)
                     self.nextCursor = page.nextSince
                     self.isLoading = false
+                    // notify loading ended
+                    self.onLoadingStatusChange?(false)
                     self.onUpdate?()
                 }
             } catch {
                 DispatchQueue.main.async { [weak self] in
                     self?.isLoading = false
+                    // notify loading ended
+                    self?.onLoadingStatusChange?(false)
                     self?.onError?(error)
                 }
             }

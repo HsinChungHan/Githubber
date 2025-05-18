@@ -9,47 +9,41 @@ import Foundation
 import UIKit
 import SnapKit
 
-/// ViewController that shows a paginated list of users, using SnapKit for layout
 final class UserListViewController: UIViewController {
     
-    // MARK: - Properties
-
     private let viewModel: UserListViewModel
     private let tableView = UITableView()
-
-    // MARK: - Init
-
+    private lazy var footerIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .medium)
+        view.hidesWhenStopped = true
+        view.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 44)
+        return view
+    }()
+    
     init(viewModel: UserListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    // MARK: - Lifecycle
+    required init?(coder: NSCoder) { fatalError() }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "GitHub Users"
         view.backgroundColor = .systemBackground
+        
         setupTableView()
         bindViewModel()
         viewModel.loadInitial()
     }
 
-    // MARK: - Setup
-
     private func setupTableView() {
         view.addSubview(tableView)
-        tableView.register(UserTableViewCell.self,
-                           forCellReuseIdentifier: UserTableViewCell.identifier)
+        tableView.register(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.identifier)
         tableView.dataSource = self
-        tableView.delegate = self
-        tableView.rowHeight = 60
-        tableView.tableFooterView = UIView()
-
+        tableView.delegate   = self
+        tableView.rowHeight  = 60
+        tableView.tableFooterView = footerIndicator
+        
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -59,24 +53,27 @@ final class UserListViewController: UIViewController {
         viewModel.onUpdate = { [weak self] in
             self?.tableView.reloadData()
         }
-        
         viewModel.onError = { [weak self] error in
-            let alert = UIAlertController(
-                title: "Error",
-                message: error.localizedDescription,
-                preferredStyle: .alert
-            )
+            let alert = UIAlertController(title: "Error",
+                                          message: error.localizedDescription,
+                                          preferredStyle: .alert)
             alert.addAction(.init(title: "OK", style: .default))
             self?.present(alert, animated: true)
+        }
+        viewModel.onLoadingStatusChange = { [weak self] isLoading in
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.footerIndicator.startAnimating()
+                } else {
+                    self?.footerIndicator.stopAnimating()
+                }
+            }
         }
     }
 }
 
-// MARK: - UITableViewDataSource
-
 extension UserListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView,
-                   numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.users.count
     }
 
@@ -94,8 +91,4 @@ extension UserListViewController: UITableViewDataSource {
     }
 }
 
-// MARK: - UITableViewDelegate
-
-extension UserListViewController: UITableViewDelegate {
-    // Implement row selection, etc. if needed
-}
+extension UserListViewController: UITableViewDelegate {}
