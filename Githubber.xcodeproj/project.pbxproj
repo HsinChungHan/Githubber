@@ -14,6 +14,14 @@
 		D16078E82DD9C9B500603998 /* UsersPageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D24E2DD9BBC1008C7DB9 /* UsersPageContainer.swift */; };
 		D16078E92DD9C9BA00603998 /* ReposPageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D2502DD9BBFA008C7DB9 /* ReposPageContainer.swift */; };
 		D16078EB2DD9CA4D00603998 /* GetUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078EA2DD9CA4D00603998 /* GetUsersUseCaseTests.swift */; };
+		D16078F02DD9E7E800603998 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078EF2DD9E7E800603998 /* User.swift */; };
+		D16078F12DD9E7F000603998 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078EF2DD9E7E800603998 /* User.swift */; };
+		D16078F32DD9E7FB00603998 /* UserPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078F22DD9E7FB00603998 /* UserPage.swift */; };
+		D16078F52DD9E90200603998 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078F42DD9E90200603998 /* Repo.swift */; };
+		D16078F62DD9E90300603998 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078F42DD9E90200603998 /* Repo.swift */; };
+		D16078F82DD9E91400603998 /* RepoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078F72DD9E91400603998 /* RepoPage.swift */; };
+		D16078F92DD9EA1400603998 /* UserPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078F22DD9E7FB00603998 /* UserPage.swift */; };
+		D16078FA2DD9EA1B00603998 /* RepoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16078F72DD9E91400603998 /* RepoPage.swift */; };
 		D168D1E62DD6D8C9008C7DB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D1E52DD6D8C9008C7DB9 /* AppDelegate.swift */; };
 		D168D1E82DD6D8C9008C7DB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D1E72DD6D8C9008C7DB9 /* SceneDelegate.swift */; };
 		D168D1EA2DD6D8C9008C7DB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168D1E92DD6D8C9008C7DB9 /* ViewController.swift */; };
@@ -74,6 +82,10 @@
 
 /* Begin PBXFileReference section */
 		D16078EA2DD9CA4D00603998 /* GetUsersUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUsersUseCaseTests.swift; sourceTree = "<group>"; };
+		D16078EF2DD9E7E800603998 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D16078F22DD9E7FB00603998 /* UserPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPage.swift; sourceTree = "<group>"; };
+		D16078F42DD9E90200603998 /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
+		D16078F72DD9E91400603998 /* RepoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoPage.swift; sourceTree = "<group>"; };
 		D168D1E22DD6D8C9008C7DB9 /* Githubber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Githubber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D168D1E52DD6D8C9008C7DB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D168D1E72DD6D8C9008C7DB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +149,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D16078EC2DD9E79300603998 /* UserListPage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UserListPage;
+			sourceTree = "<group>";
+		};
+		D16078ED2DD9E7AD00603998 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				D16078EC2DD9E79300603998 /* UserListPage */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
+		D16078EE2DD9E7D600603998 /* DomainModels */ = {
+			isa = PBXGroup;
+			children = (
+				D16078EF2DD9E7E800603998 /* User.swift */,
+				D16078F22DD9E7FB00603998 /* UserPage.swift */,
+				D16078F42DD9E90200603998 /* Repo.swift */,
+				D16078F72DD9E91400603998 /* RepoPage.swift */,
+			);
+			path = DomainModels;
+			sourceTree = "<group>";
+		};
 		D168D1D92DD6D8C9008C7DB9 = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +202,7 @@
 				D168D1E52DD6D8C9008C7DB9 /* AppDelegate.swift */,
 				D168D1E72DD6D8C9008C7DB9 /* SceneDelegate.swift */,
 				D168D1E92DD6D8C9008C7DB9 /* ViewController.swift */,
+				D16078ED2DD9E7AD00603998 /* Presenters */,
 				D168D2522DD9BC4F008C7DB9 /* DomainLayer */,
 				D168D2322DD992A8008C7DB9 /* DataLayer */,
 				D168D1EB2DD6D8C9008C7DB9 /* Main.storyboard */,
@@ -200,6 +239,7 @@
 		D168D2182DD98D57008C7DB9 /* DTOs */ = {
 			isa = PBXGroup;
 			children = (
+				D168D2342DD992C3008C7DB9 /* PaginationWrapper */,
 				D168D2192DD98D70008C7DB9 /* GitHubUserDTO.swift */,
 				D168D21B2DD98D82008C7DB9 /* GitHubRepoDTO.swift */,
 				D168D21D2DD98D95008C7DB9 /* SearchUsersResponseDTO.swift */,
@@ -211,19 +251,10 @@
 		D168D2322DD992A8008C7DB9 /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
-				D168D2332DD992B4008C7DB9 /* DomainModels */,
 				D168D2442DD9B25C008C7DB9 /* LocalStoreRepo */,
 				D168D2432DD99BF2008C7DB9 /* RemoteUserRepo */,
 			);
 			path = DataLayer;
-			sourceTree = "<group>";
-		};
-		D168D2332DD992B4008C7DB9 /* DomainModels */ = {
-			isa = PBXGroup;
-			children = (
-				D168D2342DD992C3008C7DB9 /* PaginationWrapper */,
-			);
-			path = DomainModels;
 			sourceTree = "<group>";
 		};
 		D168D2342DD992C3008C7DB9 /* PaginationWrapper */ = {
@@ -267,6 +298,7 @@
 		D168D2522DD9BC4F008C7DB9 /* DomainLayer */ = {
 			isa = PBXGroup;
 			children = (
+				D16078EE2DD9E7D600603998 /* DomainModels */,
 				D168D2532DD9C23C008C7DB9 /* SearchUsersUseCase.swift */,
 				D168D2552DD9C25E008C7DB9 /* GetUsersUseCase.swift */,
 			);
@@ -420,15 +452,19 @@
 				D168D1EA2DD6D8C9008C7DB9 /* ViewController.swift in Sources */,
 				D168D23C2DD9931D008C7DB9 /* RemoteUserRepository.swift in Sources */,
 				D168D2542DD9C23C008C7DB9 /* SearchUsersUseCase.swift in Sources */,
+				D16078F82DD9E91400603998 /* RepoPage.swift in Sources */,
 				D168D2562DD9C25E008C7DB9 /* GetUsersUseCase.swift in Sources */,
 				D168D24F2DD9BBC1008C7DB9 /* UsersPageContainer.swift in Sources */,
+				D16078F52DD9E90200603998 /* Repo.swift in Sources */,
 				D168D21E2DD98D95008C7DB9 /* SearchUsersResponseDTO.swift in Sources */,
 				D168D24A2DD9B822008C7DB9 /* StoreUsersReposRepository.swift in Sources */,
 				D168D1E62DD6D8C9008C7DB9 /* AppDelegate.swift in Sources */,
 				D168D23A2DD992FE008C7DB9 /* UserReposPage.swift in Sources */,
 				D168D2202DD98DA4008C7DB9 /* SearchUserDTO.swift in Sources */,
+				D16078F32DD9E7FB00603998 /* UserPage.swift in Sources */,
 				D168D1E82DD6D8C9008C7DB9 /* SceneDelegate.swift in Sources */,
 				D168D21C2DD98D82008C7DB9 /* GitHubRepoDTO.swift in Sources */,
+				D16078F02DD9E7E800603998 /* User.swift in Sources */,
 				D168D2362DD992DB008C7DB9 /* PublicUsersPage.swift in Sources */,
 				D168D2382DD992EE008C7DB9 /* SearchUsersPage.swift in Sources */,
 				D168D21A2DD98D70008C7DB9 /* GitHubUserDTO.swift in Sources */,
@@ -444,11 +480,14 @@
 				D16078E62DD9C9A700603998 /* StoreUsersRepository.swift in Sources */,
 				D168D2262DD98E2E008C7DB9 /* APIEndToEndTests.swift in Sources */,
 				D168D2582DD9C32C008C7DB9 /* SearchUsersUseCaseTests.swift in Sources */,
+				D16078F92DD9EA1400603998 /* UserPage.swift in Sources */,
 				D168D2422DD99AC8008C7DB9 /* UserReposPage.swift in Sources */,
 				D168D2402DD99AC4008C7DB9 /* PublicUsersPage.swift in Sources */,
+				D16078F62DD9E90300603998 /* Repo.swift in Sources */,
 				D16078E82DD9C9B500603998 /* UsersPageContainer.swift in Sources */,
 				D168D2482DD9B40C008C7DB9 /* StoreUsersRepositoryTests.swift in Sources */,
 				D168D23D2DD99322008C7DB9 /* RemoteUserRepository.swift in Sources */,
+				D16078F12DD9E7F000603998 /* User.swift in Sources */,
 				D168D23F2DD9954F008C7DB9 /* RemoteUserRepositoryE2ETests.swift in Sources */,
 				D168D2232DD98DC0008C7DB9 /* SearchUsersResponseDTO.swift in Sources */,
 				D168D2242DD98DC2008C7DB9 /* SearchUserDTO.swift in Sources */,
@@ -457,6 +496,7 @@
 				D16078E52DD9C97400603998 /* GetUsersUseCase.swift in Sources */,
 				D168D2412DD99AC6008C7DB9 /* SearchUsersPage.swift in Sources */,
 				D16078E92DD9C9BA00603998 /* ReposPageContainer.swift in Sources */,
+				D16078FA2DD9EA1B00603998 /* RepoPage.swift in Sources */,
 				D168D24C2DD9B8D9008C7DB9 /* StoreUsersReposRepositoryTests.swift in Sources */,
 				D168D2222DD98DBD008C7DB9 /* GitHubRepoDTO.swift in Sources */,
 				D168D2212DD98DB9008C7DB9 /* GitHubUserDTO.swift in Sources */,

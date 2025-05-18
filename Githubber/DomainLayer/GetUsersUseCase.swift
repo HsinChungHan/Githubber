@@ -17,21 +17,21 @@ enum GetUsersUseCaseError: Error {
 
 // MARK: - Protocol
 protocol GetUsersUseCaseProtocol {
-    func getPublicUsers(cursor: Int,
-                        perPage: Int,
-                        freshnessMinutes: Int) async throws -> PublicUsersPage
+    func getUsers(cursor: Int,
+                  perPage: Int,
+                  freshnessMinutes: Int) async throws -> UsersPage
 
     func getUserRepos(username: String,
                       page: Int,
                       perPage: Int,
-                      freshnessMinutes: Int) async throws -> UserReposPage
+                      freshnessMinutes: Int) async throws -> ReposPage
 }
 
 // MARK: - Implementation
 final class GetUsersUseCase: GetUsersUseCaseProtocol {
 
     // Dependencies
-    private let remoteRepo: RemoteUserRepositoryProtocol
+    private let remoteRepo: RemoteUserRepositoryProtocol    // :contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}
     private let usersStore: StoreUsersRepositoryProtocol
     private let reposStore: StoreUsersReposRepositoryProtocol
 
@@ -45,24 +45,43 @@ final class GetUsersUseCase: GetUsersUseCaseProtocol {
 
     // MARK: - Public users list
 
-    func getPublicUsers(cursor: Int,
-                        perPage: Int,
-                        freshnessMinutes: Int) async throws -> PublicUsersPage {
+    func getUsers(cursor: Int,
+                  perPage: Int,
+                  freshnessMinutes: Int) async throws -> UsersPage {
 
         let now  = Date().timeIntervalSince1970
         let last = try await usersStore.getLastFetchTime()
 
-        if needsRefresh(lastFetch: last, now: now, maxAge: freshnessMinutes) {
-            return try await fetchUsersRemoteAndUpdate(cursor: cursor,
-                                                       perPage: perPage,
-                                                       now: now)
-        } else if let cached = try? await usersStore.getUsersPage(cursor: cursor) {
-            return cached
-        } else {
-            return try await fetchUsersRemoteAndUpdate(cursor: cursor,
-                                                       perPage: perPage,
-                                                       now: now)
+        let dtoPage: PublicUsersPage = try await withCheckedThrowingContinuation { cont in
+            Task {
+                do {
+                    let page: PublicUsersPage
+                    if needsRefresh(lastFetch: last, now: now, maxAge: freshnessMinutes) {
+                        page = try await fetchUsersRemoteAndUpdate(cursor: cursor,
+                                                                   perPage: perPage,
+                                                                   now: now)
+                    } else if let cached = try? await usersStore.getUsersPage(cursor: cursor) {
+                        page = cached
+                    } else {
+                        page = try await fetchUsersRemoteAndUpdate(cursor: cursor,
+                                                                   perPage: perPage,
+                                                                   now: now)
+                    }
+                    cont.resume(returning: page)
+                } catch {
+                    cont.resume(throwing: error)
+                }
+            }
         }
+
+        // 轉換成 Domain Model
+        let domainUsers = dtoPage.users.map { dto in
+            User(id: dto.id,
+                 username: dto.login,
+                 avatarURL: dto.avatarUrl)    // :contentReference[oaicite:2]{index=2}:contentReference[oaicite:3]{index=3}
+        }
+        return UsersPage(users: domainUsers,
+                         nextSince: dtoPage.nextSince)
     }
 
     // MARK: - User repos list
@@ -70,40 +89,58 @@ final class GetUsersUseCase: GetUsersUseCaseProtocol {
     func getUserRepos(username: String,
                       page: Int,
                       perPage: Int,
-                      freshnessMinutes: Int) async throws -> UserReposPage {
+                      freshnessMinutes: Int) async throws -> ReposPage {
 
         let now  = Date().timeIntervalSince1970
         let last = try await reposStore.getLastFetchTime(username: username)
 
-        if needsRefresh(lastFetch: last, now: now, maxAge: freshnessMinutes) {
-            return try await fetchReposRemoteAndUpdate(user: username,
-                                                       page: page,
-                                                       perPage: perPage,
-                                                       now: now)
-        } else if let cached = try? await reposStore.getReposPage(username: username, page: page) {
-            return cached
-        } else {
-            return try await fetchReposRemoteAndUpdate(user: username,
-                                                       page: page,
-                                                       perPage: perPage,
-                                                       now: now)
+        let dtoPage: UserReposPage = try await withCheckedThrowingContinuation { cont in
+            Task {
+                do {
+                    let pageData: UserReposPage
+                    if needsRefresh(lastFetch: last, now: now, maxAge: freshnessMinutes) {
+                        pageData = try await fetchReposRemoteAndUpdate(user: username,
+                                                                       page: page,
+                                                                       perPage: perPage,
+                                                                       now: now)
+                    } else if let cached = try? await reposStore.getReposPage(username: username, page: page) {
+                        pageData = cached
+                    } else {
+                        pageData = try await fetchReposRemoteAndUpdate(user: username,
+                                                                       page: page,
+                                                                       perPage: perPage,
+                                                                       now: now)
+                    }
+                    cont.resume(returning: pageData)
+                } catch {
+                    cont.resume(throwing: error)
+                }
+            }
         }
+
+        // 轉成 Domain Model
+        let domainRepos = dtoPage.repos.map { dto in
+            Repo(name: dto.name,
+                 language: dto.language,
+                 stars: dto.stargazersCount,
+                 description: dto.description,
+                 url: dto.htmlUrl)          // :contentReference[oaicite:4]{index=4}:contentReference[oaicite:5]{index=5}
+        }
+        return ReposPage(repos: domainRepos,
+                         nextPage: dtoPage.nextPage)
     }
 
     // MARK: - Private helpers
 
-    /// Determine if cache is older than allowed max age.
     private func needsRefresh(lastFetch: TimeInterval,
                               now: TimeInterval,
                               maxAge: Int) -> Bool {
         (now - lastFetch) > Double(maxAge * 60)
     }
 
-    /// Fetch `/users` page, save to cache, return.
     private func fetchUsersRemoteAndUpdate(cursor: Int,
                                            perPage: Int,
                                            now: TimeInterval) async throws -> PublicUsersPage {
-
         let result = await remoteRepo.fetchPublicUsers(since: cursor, perPage: perPage)
         switch result {
         case .success(let page):
@@ -115,12 +152,10 @@ final class GetUsersUseCase: GetUsersUseCaseProtocol {
         }
     }
 
-    /// Fetch `/users/{username}/repos` page, save to cache, return.
     private func fetchReposRemoteAndUpdate(user username: String,
                                            page: Int,
                                            perPage: Int,
                                            now: TimeInterval) async throws -> UserReposPage {
-
         let result = await remoteRepo.fetchUserRepos(username: username,
                                                      page: page,
                                                      perPage: perPage)
