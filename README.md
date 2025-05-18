@@ -1,7 +1,7 @@
 # Githubber
 <div align="center">
 
-[🎥 Demo Video](https://github.com/user-attachments/assets/7f1aa318-1cb2-4aed-ba33-868f799a2daf)
+[🎥 Demo Video](https://github.com/user-attachments/assets/4a0cbca3-52ee-47be-9e91-a0b0b1ef30fa)
 
 </div>
 
