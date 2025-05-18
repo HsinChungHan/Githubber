@@ -13,6 +13,7 @@ enum GetUsersUseCaseError: Error {
     case failedToSavePublicUsers
     case failedToGetUserRepos
     case failedToSaveUserRepos
+    case failedToGetUserDetail
 }
 
 // MARK: - Protocol
@@ -39,9 +40,7 @@ final class GetUsersUseCase: GetUsersUseCaseProtocol {
     private let usersStore: StoreUsersRepositoryProtocol
     private let reposStore: StoreUsersReposRepositoryProtocol
 
-    init(remoteRepo: RemoteUserRepositoryProtocol,
-         usersStore: StoreUsersRepositoryProtocol,
-         reposStore: StoreUsersReposRepositoryProtocol) {
+    init(remoteRepo: RemoteUserRepositoryProtocol, usersStore: StoreUsersRepositoryProtocol, reposStore: StoreUsersReposRepositoryProtocol) {
         self.remoteRepo = remoteRepo
         self.usersStore = usersStore
         self.reposStore = reposStore
@@ -82,7 +81,7 @@ final class GetUsersUseCase: GetUsersUseCaseProtocol {
         let domainUsers = dtoPage.users.map { dto in
             User(id: dto.id,
                  username: dto.login,
-                 avatarURL: dto.avatarUrl)    // :contentReference[oaicite:2]{index=2}:contentReference[oaicite:3]{index=3}
+                 avatarURL: dto.avatarUrl)
         }
         return UsersPage(users: domainUsers,
                          nextSince: dtoPage.nextSince)

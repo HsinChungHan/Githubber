@@ -14,7 +14,7 @@ final class UserTableViewCell: UITableViewCell {
     private let avatarImageView = UIImageView()
     private let usernameLabel   = UILabel()
     
-    /// 用來取消正在進行的 avatar 載入
+    /// to cancel loading avatar task
     private var avatarLoadTask: Task<Void, Never>?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -43,28 +43,20 @@ final class UserTableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        // 1. 取消任何正在跑的 avatar 載入
+        // cancel any loading avatar task
         avatarLoadTask?.cancel()
         avatarImageView.image = nil
         usernameLabel.text = nil
     }
 
     /// Configure cell with a User and an async avatar data provider
-    func configure(
-        with user: User,
-        avatarProvider: @escaping (URL) async throws -> Data
-    ) {
+    func configure(with user: User, avatarProvider: @escaping (URL) async throws -> Data) {
         usernameLabel.text = user.username
-        
-        // 2. 先取消舊任務
         avatarLoadTask?.cancel()
         avatarImageView.image = nil
-        
-        // 3. 建立新 Task 來載入 avatar data
         avatarLoadTask = Task {
             do {
                 let data = try await avatarProvider(user.avatarURL)
-                // Task 被取消就不要再更新 UI
                 guard !Task.isCancelled else { return }
                 
                 if let img = UIImage(data: data) {
@@ -73,7 +65,6 @@ final class UserTableViewCell: UITableViewCell {
                     }
                 }
             } catch {
-                // 可以加上錯誤處理或 fallback 圖片
                 print("Failed to load avatar:", error)
             }
         }

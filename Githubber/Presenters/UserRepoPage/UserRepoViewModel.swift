@@ -43,7 +43,6 @@ final class UserRepoViewModel {
         self.favoriteUseCase = favoriteUseCase
     }
 
-    /// 同時載入使用者資料 & Repo 清單
     func loadAll() {
         fetchDetail()
         fetchRepos()
@@ -64,7 +63,10 @@ final class UserRepoViewModel {
             }
         }
     }
-    
+}
+
+// MARK: - Private helpers
+extension UserRepoViewModel {
     private func fetchDetail() {
         Task {
             do {
@@ -101,7 +103,7 @@ final class UserRepoViewModel {
                     freshnessMinutes: 10
                 )
                 DispatchQueue.main.async {
-                    self.repos = page.repos   // 已由 RemoteUserRepository 過濾掉 fork
+                    self.repos = page.repos
                     self.onReposUpdate?()
                 }
             } catch {
@@ -110,4 +112,4 @@ final class UserRepoViewModel {
         }
     }
 }
-
+ 

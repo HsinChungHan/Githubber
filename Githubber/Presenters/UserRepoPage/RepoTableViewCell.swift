@@ -44,8 +44,6 @@ final class RepoTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        // 1. 固定左右 16pt padding
         contentView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
         let margin = contentView.layoutMarginsGuide
         

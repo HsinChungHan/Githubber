@@ -8,5 +8,5 @@
 import Foundation
 struct ReposPage {
     let repos: [Repo]
-    let nextPage: Int?       // 下一頁的 page，nil → 無更多
+    let nextPage: Int? 
 }

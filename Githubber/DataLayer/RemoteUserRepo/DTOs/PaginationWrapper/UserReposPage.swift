@@ -8,5 +8,5 @@
 import Foundation
 struct UserReposPage {
     let repos: [GitHubRepoDTO]
-    let nextPage: Int?       // nil → no further page
+    let nextPage: Int?
 }

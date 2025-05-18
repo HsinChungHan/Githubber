@@ -23,7 +23,6 @@ final class FavoriteReposViewModel {
         self.useCase = useCase
     }
 
-    /// 載入所有收藏
     func loadFavorites() {
         Task {
             do {
@@ -40,8 +39,7 @@ final class FavoriteReposViewModel {
         }
     }
 
-    /// 切換收藏狀態
-    func toggleFavorite(_ repo: Repo) {
+    func unfavorite(_ repo: Repo) {
         Task {
             do {
                 if favorites.contains(where: { $0.url == repo.url }) {

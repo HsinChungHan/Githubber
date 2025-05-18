@@ -9,5 +9,5 @@ import Foundation
 struct SearchUsersPage {
     let items: [SearchUserDTO]
     let totalCount: Int
-    let nextPage: Int?       // nil → no further page
+    let nextPage: Int?
 }

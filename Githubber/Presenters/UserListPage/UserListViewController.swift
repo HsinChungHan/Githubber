@@ -80,9 +80,7 @@ final class UserListViewController: UIViewController {
             self?.present(alert, animated: true)
         }
         
-        viewModel.onLoadingStatusChange = { [weak self] isLoading in
-            // (footer indicator if needed)
-        }
+        viewModel.onLoadingStatusChange = { isLoading in }
     }
 
     // MARK: - Helpers

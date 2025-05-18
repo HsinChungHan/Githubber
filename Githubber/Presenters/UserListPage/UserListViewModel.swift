@@ -59,9 +59,10 @@ final class UserListViewModel {
     func avatarData(for url: URL) async throws -> Data {
         try await useCase.getUserAvatarData(from: url)
     }
-    
-    // MARK: - Private
-    
+}
+
+// MARK: - Private helpers
+extension UserListViewModel {
     private func fetchNext() {
         guard let cursor = nextCursor, !isLoading else { return }
         isLoading = true

@@ -72,9 +72,7 @@ final class FavoriteReposViewController: UIViewController {
     }
 }
 
-// 其餘 UITableViewDataSource, UITableViewDelegate 不變
-
-
+// MARK: - UITableViewDataSource
 extension FavoriteReposViewController: UITableViewDataSource {
     func tableView(_ tv: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.favorites.count
@@ -90,6 +88,7 @@ extension FavoriteReposViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension FavoriteReposViewController: UITableViewDelegate {
     func tableView(_ tv: UITableView, didSelectRowAt ip: IndexPath) {
         tv.deselectRow(at: ip, animated: true)
@@ -104,7 +103,7 @@ extension FavoriteReposViewController: UITableViewDelegate {
     -> UISwipeActionsConfiguration? {
         let repo = viewModel.favorites[indexPath.row]
         let action = UIContextualAction(style: .destructive, title: "Unfavorite") { [weak self] _, _, cb in
-            self?.viewModel.toggleFavorite(repo)
+            self?.viewModel.unfavorite(repo)
             cb(true)
         }
         return UISwipeActionsConfiguration(actions: [action])

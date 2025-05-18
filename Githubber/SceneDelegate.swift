@@ -16,11 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
-
-        // 1. 建立 MainTabBarController
         let tabBar = MainTabBarController()
-
-        // 2. 建立 window 並指定 tabBar 為 root
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = tabBar
         self.window = window

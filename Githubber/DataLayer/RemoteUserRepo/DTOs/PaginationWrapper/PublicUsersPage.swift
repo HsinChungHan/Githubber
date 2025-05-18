@@ -8,5 +8,5 @@
 import Foundation
 struct PublicUsersPage {
     let users: [SearchUserDTO]
-    let nextSince: Int?      // nil → no further page
+    let nextSince: Int?
 }

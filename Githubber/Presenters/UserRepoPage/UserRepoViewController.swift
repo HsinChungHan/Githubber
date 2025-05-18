@@ -95,19 +95,15 @@ final class UserRepoViewController: UIViewController {
         return header
     }
 
-    /// 重新計算 tableHeaderView 的高度並套用
     private func updateTableHeaderHeight() {
         guard let header = tableView.tableHeaderView else { return }
-        // 讓 header 先 layout 一遍
         header.setNeedsLayout()
         header.layoutIfNeeded()
-        // 按照 AutoLayout 算出合适高度
         let targetSize = CGSize(
             width: tableView.bounds.width,
             height: UIView.layoutFittingCompressedSize.height
         )
         let height = header.systemLayoutSizeFitting(targetSize).height
-        // 重新设置 frame
         var frame = header.frame
         frame.size.height = height
         header.frame = frame
@@ -118,12 +114,10 @@ final class UserRepoViewController: UIViewController {
         viewModel.onDetailUpdate = { [weak self] in
             guard let self = self, let d = self.viewModel.userDetail else { return }
             
-            // 更新 UI
             Task {
                 do {
                     let data = try await self.viewModel.avatarData(from: d.avatarURL)
                     if let img = UIImage(data: data) {
-                        // 確保主線程更新
                         await MainActor.run {
                             self.avatarImageView.image = img
                         }
@@ -138,13 +132,13 @@ final class UserRepoViewController: UIViewController {
             self.fullNameLabel.text  = d.fullName
             self.followersLabel.text = "\(d.followers) Followers"
             self.followingLabel.text = "\(d.following) Following"
-            
-            // 重新计算 header 高度
             self.updateTableHeaderHeight()
         }
+        
         viewModel.onReposUpdate = { [weak self] in
             self?.tableView.reloadData()
         }
+        
         viewModel.onError = { [weak self] error in
             let alert = UIAlertController(
                 title: "Error",
@@ -157,6 +151,7 @@ final class UserRepoViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension UserRepoViewController: UITableViewDataSource {
     func tableView(_ tv: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
