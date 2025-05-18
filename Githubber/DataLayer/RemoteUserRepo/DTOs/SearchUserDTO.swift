@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - User list item  (/users  &  /search/users items[])
-struct SearchUserDTO: Decodable {
+struct SearchUserDTO: Codable {
     let login: String
     let id: Int
     let avatarUrl: URL           // avatar_url → avatarUrl
